@@ -1,0 +1,65 @@
+{
+  "band": "ABBA",
+  "formation_year": 1972,
+  "members": [
+    {
+      "name": "Agnetha Fältskog",
+      "role": "vocals"
+    },
+    {
+      "name": "Björn Ulvaeus",
+      "role": "guitar and vocals"
+    },
+    {
+      "name": "Benny Andersson",
+      "role": "keyboards and vocals"
+    },
+    {
+    "name": "Anni-Frid Lyngstad",
+      "role": "vocals"
+    }
+  ],
+  "albums": [
+    {
+      "title": "Ring Ring",
+      "release_year": 1973,
+      "songs": ["Ring Ring", "Another Town, Another Train"]
+    },
+    {
+      "title": "Waterloo",
+      "release_year": 1974,
+      "songs": ["Waterloo", "Honey, Honey"]
+    },
+    {
+      "title": "ABBA",
+      "release_year": 1975,
+      "songs": ["Mamma Mia", "SOS"]
+    },
+    {
+      "title": "Arrival",
+      "release_year": 1976,
+      "songs": ["Dancing Queen", "Knowing Me, Knowing You"]
+    },
+    {
+      "title": "The Album",
+      "release_year": 1977,
+      "songs": ["Take a Chance on Me", "Thank You for the Music"]
+    },
+    {
+      "title": "Voulez-Vous",
+      "release_year": 1979,
+      "songs": ["Chiquitita", "Voulez-Vous"]
+    },
+    {
+      "title": "Super Trouper",
+      "release_year": 1980,
+      "songs": ["Super Trouper", "The Winner Takes It All"]
+    },
+    {
+      "title": "The Visitors",
+      "release_year": 1981,
+      "songs": ["One of Us", "When All Is Said and Done"]
+    }
+  ],
+  "genres": ["Pop", "Disco", "Europop"]
+}

@@ -1,0 +1,56 @@
+app:
+  config:
+    name: 'generic-app'
+
+llm:
+  provider: openai
+  config:
+    model: 'gpt-4o-mini'
+    temperature: 0.9
+    max_tokens: 1000
+    top_p: 1
+    stream: false
+    api_key: sk-xxx
+    model_kwargs:
+      response_format: 
+        type: json_object
+    api_version: 2024-02-01
+    prompt: |
+ Use the following pieces of context to answer the query at the end.
+ If you don't know the answer, just say that you don't know, don't try to make up an answer.
+
+      $context
+
+      Query: $query
+
+      Helpful Answer:
+    system_prompt: |
+ Respond without preamble and small talk. Be concise.
+
+# vectordb:
+#   provider: chroma
+#   config:
+#     collection_name: 'full-stack-app'
+#     dir: db
+#     allow_reset: true
+
+# embedder:
+#   provider: openai
+#   config:
+#     model: 'text-embedding-ada-002'
+#     api_key: sk-xxx
+#     http_client_proxies: http://testproxy.mem0.net:8000
+
+# chunker:
+#   chunk_size: 2000
+#   chunk_overlap: 100
+#   length_function: 'len'
+#   min_chunk_size: 0
+
+# cache:
+#   similarity_evaluation:
+#     strategy: distance
+#     max_distance: 1.0
+#   config:
+#     similarity_threshold: 0.8
+#     auto_flush: 50
