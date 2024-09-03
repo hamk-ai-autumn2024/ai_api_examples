@@ -10,5 +10,6 @@ from embedchain import App
 app = App()
 app.reset()  # Resets the app to start fresh, otherwise it will append to the existing data
 app.add('little_red_cap.txt', data_type="text_file")
-answer = app.query("Summarize")
+app.add('plato_apology_pg1656.txt', data_type="text_file")
+answer = app.query("Summarize Little Red Cap and Plato's Apology. What did we learn from these 2 texts?")
 print(answer)

@@ -6,12 +6,12 @@ from openai import OpenAI
 client = OpenAI()  # this assumes you have set the OPENAI_API_KEY environment variable
 
 completion = client.chat.completions.create(
-    model="gpt-4o-mini", # Change your model here
+    model="gpt-4o", # Change your model here
     messages=[
         # this is the system prompt
-        {"role": "system", "content": "Always answer in rhymes."},
+        {"role": "system", "content": "Always to your best ability."},
 
-        {"role": "user", "content": "Introduce yourself."}
+        {"role": "user", "content": "Selitä esimerkein suomen kielen adjektiivien vertailumuodot."}
     ],
     temperature=0.9,
     max_tokens=500,
