@@ -8,7 +8,9 @@ import base64
 start_time = time.time()
 
 # Parse command line options
-usage = "Usage: %prog [options] input_image (url or file path)"
+usage = """Usage: %prog [options] input_image (url or file path)
+Upscale an image using Real-ESRGAN. The input image can be a URL or a local file path.
+Upscale 2x by default. Face enhancement is not enabled by default."""
 parser = optparse.OptionParser(usage=usage)
 parser.add_option("-s", "--scale_factor", dest="scale_factor", default=2, type="int", help="Scale factor for upscaling (default: 2)")
 parser.add_option("-f", "--face_enhance", dest="face_enhance", default=False, action="store_true", help="Enable face enhancement (default: False)")

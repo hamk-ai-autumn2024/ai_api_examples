@@ -7,13 +7,14 @@ start_time = time.time()
 print("Generating image...")
 output = replicate.run(
     #"pwntus/flux-albert-einstein:2ed2f6d1a8563caa2cfada419dffc68b52881bab9bac30c0b8cbe05a4dcae0e5",
-    #"bingbangboom-lab/flux-dreamscape:b761fa16918356ee07f31fad9b0d41d8919b9ff08f999e2d298a5a35b672f47e",
-    "black-forest-labs/flux-dev",
+    "bingbangboom-lab/flux-dreamscape:b761fa16918356ee07f31fad9b0d41d8919b9ff08f999e2d298a5a35b672f47e",
+    #"black-forest-labs/flux-pro",
+    #"black-forest-labs/flux-dev",
     input={
         "model": "dev",
         #"prompt": "Happy Einstein in a party, surrounded by female scientists and confetti. He is smiling and holding a glass",
-        #"prompt": "calm and peaceful landscape with a small house in the middle of a field of flowers and a clear blue sky",
-        "prompt": 'a slim programmer wearing eye glasses and a t-shirt with the text "FLUX" on it',
+        "prompt": "calm and peaceful landscape with a small house in the middle of a field of flowers and a clear blue sky with dramatic clouds",
+        #"prompt": 'a slim female programmer wearing eye glasses and a t-shirt with the text "FLUX" on it',
         "lora_scale": 1,
         "num_outputs": 1,
         #"aspect_ratio": "1:1",

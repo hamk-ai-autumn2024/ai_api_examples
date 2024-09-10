@@ -12,7 +12,7 @@ monster_client = client(api_key)
 model = 'sdxl-base' 
 # Replace with the desired model name
 input_data = {
-  'prompt': 'photo of beautiful elf sorceress casting a spell in a fantasy setting',  # text prompt
+  'prompt': 'Finnish woman in a class room',  # text prompt
   'negprompt': 'unreal, fake, meme, joke, disfigured, poor quality, bad, ugly',
   'samples': 2,  # number of images to generate
   'enhance': True,  

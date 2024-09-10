@@ -16,7 +16,8 @@ def encode_image(image_path):
         return base64.b64encode(image_file.read()).decode("utf-8")
 
 # Path to your image
-image_path = "dall_0.png"
+#image_path = "dall_0.png"
+image_path = "drawing1.png"
 
 # Getting the base64 string
 base64_image = encode_image(image_path)
@@ -44,5 +45,5 @@ response = requests.post(
     "https://api.openai.com/v1/chat/completions", headers=headers, json=payload
 )
 
-print(response.json())
+#print(response.json())
 print(response.json().get("choices")[0].get("message").get("content"))

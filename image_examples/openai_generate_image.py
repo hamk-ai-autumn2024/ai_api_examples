@@ -6,10 +6,11 @@ client = OpenAI()  # use the API key from the OPENAI_API_KEY environment variabl
 
 response = client.images.generate(
   model="dall-e-3",
-  prompt="Modern Mona Lisa by Leonardo da Vinci, but with a modern twist. The painting",
-  size="1024x1024",  #size="1792x1024", #size="1024x1792",
+  prompt="photo of a Finnish woman in a class room",
+  #prompt="Modern Mona Lisa by Leonardo da Vinci, but with a modern twist. The painting",
+  size="1792x1024",  #size="1792x1024", #size="1024x1792",
   quality="hd",  #quality="standard",
-  style="vivid",  #style="natural",
+  style="natural",  #style="vivid" #style="natural",
   n=1,  # number of images to generate, Dall-E 3 accepts just 1
 )
 
