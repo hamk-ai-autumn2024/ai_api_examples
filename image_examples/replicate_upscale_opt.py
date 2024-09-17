@@ -4,6 +4,7 @@ from file_util import *
 import optparse
 import sys
 import base64
+import argparse
 
 start_time = time.time()
 
@@ -11,16 +12,19 @@ start_time = time.time()
 usage = """Usage: %prog [options] input_image (url or file path)
 Upscale an image using Real-ESRGAN. The input image can be a URL or a local file path.
 Upscale 2x by default. Face enhancement is not enabled by default."""
-parser = optparse.OptionParser(usage=usage)
-parser.add_option("-s", "--scale_factor", dest="scale_factor", default=2, type="int", help="Scale factor for upscaling (default: 2)")
-parser.add_option("-f", "--face_enhance", dest="face_enhance", default=False, action="store_true", help="Enable face enhancement (default: False)")
-(options, args) = parser.parse_args()
+parser = argparse.ArgumentParser(prog="replicate_upscale_opt.py", description=usage)
+parser.add_argument("-s", "--scale_factor", dest="scale_factor", default=2, type=int, help="Scale factor for upscaling (default: 2)")
+parser.add_argument("-f", "--face_enhance", dest="face_enhance", default=False, action="store_true", help="Enable face enhancement (default: False)")
+parser.add_argument("files", nargs=1, help="Input image URL or file path")
+args = parser.parse_args()
 
 # Get input image URL from command line
-if len(args) == 0:
-    print("Error: Input image URL is required.")
-    sys.exit(1)
-input_image = args[0]
+#if len(args) == 0:
+#    print("Error: Input image URL is required.")
+#    sys.exit(1)
+#input_image = args[0]
+
+input_image = args.files[0]
 
 if input_image.startswith("http"):
     print(f"Reading image from URL {input_image} ...")
@@ -34,8 +38,8 @@ output = replicate.run(
     "nightmareai/real-esrgan:f121d640bd286e1fdc67f9799164c1d5be36ff74576ee11c803ae5b665dd46aa",
     input={
         "image": input_image,
-        "scale": options.scale_factor,
-        "face_enhance": options.face_enhance
+        "scale": args.scale_factor,
+        "face_enhance": args.face_enhance
     }
 )
 
