@@ -23,7 +23,6 @@ data = response.json()
 # print the data, which is a bit complex due to nested dictionaries
 if data["code"] == 200:
     clips = data["data"]["clips"]
-    print(type(clips))
     # iterate over the clips dictionary
     for song_id, song_data in clips.items():
         print(f"Song ID: {song_id}")

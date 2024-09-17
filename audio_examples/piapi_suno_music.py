@@ -18,7 +18,7 @@ Nothing ever feels the same.
 
 [Pre-Chorus]
 And I, can't escape 
-Theshadows of our fate.
+The shadows of our fate.
 
 [Chorus]
 Aah, I'm lost without your love,

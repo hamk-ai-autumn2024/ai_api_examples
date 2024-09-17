@@ -1,6 +1,6 @@
 from openai import OpenAI
 import sounddevice as sd
-import numpy as np
+#import numpy as np
 import wavio
 
 fs = 44100  # Sample rate
