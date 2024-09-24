@@ -1,4 +1,5 @@
 import anthropic
+import json
 
 client = anthropic.Anthropic(
     # defaults to os.environ.get("ANTHROPIC_API_KEY")
@@ -25,4 +26,14 @@ message = client.messages.create(
         },
     ]
 )
-print(message.content[0].text)
+
+json_text = message.content[0].text
+print(json_text)
+try:
+    json_obj = json.loads(json_text)
+    json_formatted = json.dumps(json_obj, indent=4)
+    print(json_formatted)
+except json.JSONDecodeError as e:
+    print("Error decoding JSON:", e)
+
+

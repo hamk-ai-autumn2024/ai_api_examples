@@ -6,7 +6,7 @@ client = anthropic.Anthropic()  # this assumes you have set the ANTHROPIC_API_KE
 message = client.messages.create(
     model="claude-3-5-sonnet-20240620",
     max_tokens=1024,
-    system = "Respond directely without any preamble. Use markdown formatting.",
+    system = "Respond directly without any preamble. Use markdown formatting.",
     messages=[
         {
             "role": "user",
