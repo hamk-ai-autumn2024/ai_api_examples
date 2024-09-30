@@ -1,19 +1,5 @@
 import streamlit as st
 
-st.title("This is Main Title")
-st.header("This is a header")
-st.subheader("This is a subheader")
-st.text("""Preformatted fixed-width text.""")
-code = '''import streamlit as st
-st.title("This is Main Title")'''
-st.code(code, language='python')
-st.latex(r"d = \sqrt{x^2+y^2+z^2}")
-st.markdown("""This is a _markdown_ text, with HTML
-<h1 style='color:red'>HTML</h1>""", unsafe_allow_html=True)
-st.image("https://streamlit.io/images/brand/streamlit-mark-color.png", caption="Streamlit logo", use_column_width=True)
-st.image("petri.jpg", caption="Petri Kuittinen", use_column_width=True)
-st.video("https://www.youtube.com/watch?v=9D2aI30AMhM")
-st.divider()  # similar to <hr> in HTML
 st.write("""Streamlit supports markdown syntax. For example, you can write math equations like this: $y = x^2$
 Or **bold** and *italic* and ***bold and italic*** text. You can also create tables:
 | Syntax | Description |
@@ -59,4 +45,3 @@ Images are only supported as URLs:
 ![Streamlit logo](https://streamlit.io/images/brand/streamlit-mark-color.png)
 """)
 st.write(r"More math, need raw strings $$ x = {-b \pm \sqrt{b^2-4ac} \over 2a} $$")
-
