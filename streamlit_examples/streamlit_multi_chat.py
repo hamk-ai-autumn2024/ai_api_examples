@@ -51,7 +51,7 @@ if openai_api_key and anthropic_api_key and cohere_api_key:
                     cohere_response = completion(model="command-r-plus", messages=messages, api_key=cohere_api_key)
                     st.write(cohere_response.choices[0].message.content)
                 except Exception as e:
-                    st.error(f"Error with Gemini: {str(e)}")
+                    st.error(f"Error with Cohere: {str(e)}")
             
             # Compare responses
             st.subheader("Response Comparison")

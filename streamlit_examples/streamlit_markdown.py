@@ -43,5 +43,6 @@ Links are also supported: [Streamlit](https://streamlit.io/)
 
 Images are only supported as URLs:
 ![Streamlit logo](https://streamlit.io/images/brand/streamlit-mark-color.png)
+or your could base64 encode the image and give as data URL.
 """)
 st.write(r"More math, need raw strings $$ x = {-b \pm \sqrt{b^2-4ac} \over 2a} $$")
