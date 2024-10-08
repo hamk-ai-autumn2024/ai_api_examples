@@ -3,11 +3,11 @@ from langchain import hub
 from langchain_community.agent_toolkits.load_tools import load_tools
 from langchain.agents import AgentExecutor, create_react_agent
 from langchain_community.callbacks.streamlit import StreamlitCallbackHandler
-from langchain_openai import OpenAI, ChatOpenAI
+from langchain_openai import ChatOpenAI
 
 # You should set up OPENAI_API_KEY and LANGCHAIN_API_KEY in your environment variables
 model = ChatOpenAI(model_name="gpt-4o-mini", temperature=0.3, streaming=True)
-#model = OpenAI(temperature=0.5, streaming=True)
+
 tools = load_tools(["ddg-search"])
 prompt = hub.pull("hwchase17/react")
 agent = create_react_agent(model, tools, prompt)

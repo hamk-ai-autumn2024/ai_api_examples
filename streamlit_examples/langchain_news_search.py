@@ -6,6 +6,7 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.output_parsers import StrOutputParser
 from langchain_community.document_loaders import UnstructuredURLLoader
 from langchain_community.utilities import GoogleSerperAPIWrapper
+from langchain.chains import load_summarize_chain
 import os
 
 # Streamlit app
@@ -24,7 +25,7 @@ col1, col2 = st.columns([1, 3])
 # If the 'Search' button is clicked
 if col1.button("Search"):
     # Validate inputs
-    if not open_api_key.strip() or not serper_api_key.strip() or not search_query.strip():
+    if not search_query.strip():
         st.error(f"Please provide the missing fields.")
     else:
         try:
@@ -44,7 +45,7 @@ if col1.button("Search"):
 # If 'Search & Summarize' button is clicked
 if col2.button("Search & Summarize"):
     # Validate inputs
-    if not open_api_key.strip() or not serper_api_key.strip() or not search_query.strip():
+    if not search_query.strip():
         st.error(f"Please provide the missing fields.")
     else:
         try:
@@ -63,7 +64,7 @@ if col2.button("Search & Summarize"):
                         data = loader.load()
                 
                         # Initialize the ChatOpenAI module, load and run the summarize chain
-                        llm = ChatOpenAI(temperature=0, openai_api_key=openai_api_key)
+                        llm = ChatOpenAI(temperature=0)
                         prompt_template = """Write a summary of the following in 100-150 words:
                             
                             {text}

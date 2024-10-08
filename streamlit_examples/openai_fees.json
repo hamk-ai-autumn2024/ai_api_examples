@@ -1,0 +1,278 @@
+[
+  {
+    "model_name": "gpt-4o",
+    "input_fee": "US$2.50 / 1M input tokens",
+    "output_fee": "US$10.00 / 1M output tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-4o-2024-08-06",
+    "input_fee": "US$2.50 / 1M input tokens",
+    "output_fee": "US$10.00 / 1M output tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-4o-2024-05-13",
+    "input_fee": "US$5.00 / 1M input tokens",
+    "output_fee": "US$15.00 / 1M output tokens",
+    "error": false
+  },
+  {
+    "model_name": "GPT-4o mini",
+    "input_fee": "Not specified",
+    "output_fee": "Not specified",
+    "error": false
+  },
+  {
+    "model_name": "gpt-4o-2024-08-06",
+    "input_fee": "US$3.750 / 1M tokens",
+    "output_fee": "US$15.000 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-4o-mini-2024-07-18",
+    "input_fee": "US$0.300 / 1M tokens",
+    "output_fee": "US$1.200 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-3.5-turbo",
+    "input_fee": "US$3.000 / 1M tokens",
+    "output_fee": "US$6.000 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "davinci-002",
+    "input_fee": "US$12.000 / 1M tokens",
+    "output_fee": "US$12.000 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "babbage-002",
+    "input_fee": "US$1.600 / 1M tokens",
+    "output_fee": "US$1.600 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-4o-realtime-preview",
+    "input_fee": "US$5.00 / 1M tokens",
+    "output_fee": "US$20.00 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-4o-realtime-preview-2024-10-01",
+    "input_fee": "US$5.00 / 1M tokens",
+    "output_fee": "US$20.00 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "GPT-4o",
+    "input_fee": "Not specified",
+    "output_fee": "Not specified",
+    "error": false
+  },
+  {
+    "model_name": "GPT-4o mini",
+    "input_fee": "Not specified",
+    "output_fee": "Not specified",
+    "error": false
+  },
+  {
+    "model_name": "gpt-4o-mini",
+    "input_fee": "$0.150 / 1M input tokens",
+    "output_fee": "$0.600 / 1M output tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-4o-mini-2024-07-18",
+    "input_fee": "$0.150 / 1M input tokens",
+    "output_fee": "$0.600 / 1M output tokens",
+    "error": false
+  },
+  {
+    "model_name": "o1-preview",
+    "input_fee": "$15.00 / 1M input tokens",
+    "output_fee": "$60.00 / 1M output tokens",
+    "error": false
+  },
+  {
+    "model_name": "o1-preview-2024-09-12",
+    "input_fee": "$15.00 / 1M input tokens",
+    "output_fee": "$60.00 / 1M output tokens",
+    "error": false
+  },
+  {
+    "model_name": "o1-mini",
+    "input_fee": "$3.00 / 1M input tokens",
+    "output_fee": "$12.00 / 1M output tokens",
+    "error": false
+  },
+  {
+    "model_name": "o1-mini-2024-09-12",
+    "input_fee": "$3.00 / 1M input tokens",
+    "output_fee": "$12.00 / 1M output tokens",
+    "error": false
+  },
+  {
+    "model_name": "text-embedding-3-small",
+    "input_fee": "$0.020 / 1M tokens",
+    "output_fee": "N/A",
+    "error": false
+  },
+  {
+    "model_name": "text-embedding-3-large",
+    "input_fee": "$0.130 / 1M tokens",
+    "output_fee": "N/A",
+    "error": false
+  },
+  {
+    "model_name": "ada v2",
+    "input_fee": "$0.100 / 1M tokens",
+    "output_fee": "N/A",
+    "error": false
+  },
+  {
+    "model_name": "gpt-4o-2024-05-13",
+    "input_fee": "US$5.00 / 1M tokens",
+    "output_fee": "US$15.00 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-4o-2024-08-06",
+    "input_fee": "US$5.00 / 1M tokens",
+    "output_fee": "US$15.00 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-4o-mini",
+    "input_fee": "US$5.00 / 1M tokens",
+    "output_fee": "US$15.00 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-4o-mini-2024-07-18",
+    "input_fee": "US$5.00 / 1M tokens",
+    "output_fee": "US$15.00 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-4-2024-04-09",
+    "input_fee": "US$5.00 / 1M tokens",
+    "output_fee": "US$15.00 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-4-turbo",
+    "input_fee": "US$5.00 / 1M tokens",
+    "output_fee": "US$15.00 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-4-vision-preview",
+    "input_fee": "US$5.00 / 1M tokens",
+    "output_fee": "US$15.00 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-4-1106-vision-preview",
+    "input_fee": "US$5.00 / 1M tokens",
+    "output_fee": "US$15.00 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "chatgpt-4o-latest",
+    "input_fee": "US$5.00 / 1M tokens",
+    "output_fee": "US$15.00 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-4-turbo",
+    "input_fee": "US$10.00 / 1M tokens",
+    "output_fee": "US$30.00 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-4-turbo-2024-04-09",
+    "input_fee": "US$10.00 / 1M tokens",
+    "output_fee": "US$30.00 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-4",
+    "input_fee": "US$30.00 / 1M tokens",
+    "output_fee": "US$60.00 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-4-32k",
+    "input_fee": "US$60.00 / 1M tokens",
+    "output_fee": "US$120.00 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-4-0125-preview",
+    "input_fee": "US$10.00 / 1M tokens",
+    "output_fee": "US$30.00 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-4-1106-preview",
+    "input_fee": "US$10.00 / 1M tokens",
+    "output_fee": "US$30.00 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-4-vision-preview",
+    "input_fee": "US$10.00 / 1M tokens",
+    "output_fee": "US$30.00 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-3.5-turbo-0125",
+    "input_fee": "US$0.50 / 1M tokens",
+    "output_fee": "US$1.50 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-3.5-turbo-instruct",
+    "input_fee": "US$1.50 / 1M tokens",
+    "output_fee": "US$2.00 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-3.5-turbo-1106",
+    "input_fee": "US$1.00 / 1M tokens",
+    "output_fee": "US$2.00 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-3.5-turbo-0613",
+    "input_fee": "US$1.50 / 1M tokens",
+    "output_fee": "US$2.00 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-3.5-turbo-16k-0613",
+    "input_fee": "US$3.00 / 1M tokens",
+    "output_fee": "US$4.00 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "gpt-3.5-turbo-0301",
+    "input_fee": "US$1.50 / 1M tokens",
+    "output_fee": "US$2.00 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "davinci-002",
+    "input_fee": "US$2.00 / 1M tokens",
+    "output_fee": "US$2.00 / 1M tokens",
+    "error": false
+  },
+  {
+    "model_name": "babbage-002",
+    "input_fee": "US$0.40 / 1M tokens",
+    "output_fee": "US$0.40 / 1M tokens",
+    "error": false
+  }
+]
