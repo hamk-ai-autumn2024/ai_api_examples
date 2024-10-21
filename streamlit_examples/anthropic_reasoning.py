@@ -110,14 +110,14 @@ def main():
     
     st.title("Claude Reasoning Chain: Extended self-reflection and analysis")
     
-    st.markdown("""
-    This is an improved prototype using prompting to create reasoning chains with extended self-reflection to improve output accuracy. It now thinks for longer periods and provides more detailed analysis, powered by Anthropic's Claude API.
-    """)
+    # st.markdown("""
+    # This is an improved prototype using prompting to create reasoning chains with extended self-reflection to improve output accuracy. It now thinks for longer periods and provides more detailed analysis, powered by Anthropic's Claude API.
+    # """)
     
     # Text input for user query
     user_query = st.text_input("Enter your query:", placeholder="e.g., What are the potential long-term effects of climate change on global agriculture?")
-    
-    if user_query:
+    button = st.button("Generate response")
+    if button and user_query:
         st.write("Generating response... This may take a while due to extended thinking time.")
         
         # Create empty elements to hold the generated text and total time
