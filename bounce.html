@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bouncing Ball in Dodecahedron</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="glCanvas" width="800" height="600"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"></script>
+    <script>
+        const vsSource = `
+            attribute vec4 aVertexPosition;
+            attribute vec4 aVertexColor;
+            uniform mat4 uModelViewMatrix;
+            uniform mat4 uProjectionMatrix;
+            varying lowp vec4 vColor;
+            void main() {
+                gl_Position = uProjectionMatrix * uModelViewMatrix * aVertexPosition;
+                vColor = aVertexColor;
+            }
+        `;
+
+        const fsSource = `
+            varying lowp vec4 vColor;
+            void main() {
+                gl_FragColor = vColor;
+            }
+        `;
+
+        let rotation = 0;
+        let ballPosition = [0, 0, 0];
+        let ballVelocity = [0.02, 0.03, 0.01];
+        const ballRadius = 0.1;
+
+        function main() {
+            const canvas = document.getElementById('glCanvas');
+            const gl = canvas.getContext('webgl');
+
+            if (!gl) {
+                alert('WebGL not available');
+                return;
+            }
+
+            const shaderProgram = initShaderProgram(gl, vsSource, fsSource);
+            const programInfo = {
+                program: shaderProgram,
+                attribLocations: {
+                    vertexPosition: gl.getAttribLocation(shaderProgram, 'aVertexPosition'),
+                    vertexColor: gl.getAttribLocation(shaderProgram, 'aVertexColor'),
+                },
+                uniformLocations: {
+                    projectionMatrix: gl.getUniformLocation(shaderProgram, 'uProjectionMatrix'),
+                    modelViewMatrix: gl.getUniformLocation(shaderProgram, 'uModelViewMatrix'),
+                },
+            };
+
+            const buffers = initBuffers(gl);
+            
+            function render() {
+                updateBallPosition();
+                drawScene(gl, programInfo, buffers);
+                rotation += 0.01;
+                requestAnimationFrame(render);
+            }
+            render();
+        }
+
+        function updateBallPosition() {
+            // Update position
+            for (let i = 0; i < 3; i++) {
+                ballPosition[i] += ballVelocity[i];
+            }
+
+            // Simple collision detection with dodecahedron boundaries
+            const maxDistance = 1.0;
+            const distanceFromCenter = Math.sqrt(
+                ballPosition[0] * ballPosition[0] +
+                ballPosition[1] * ballPosition[1] +
+                ballPosition[2] * ballPosition[2]
+            );
+
+            if (distanceFromCenter + ballRadius > maxDistance) {
+                // Reflect velocity
+                const norm = Math.sqrt(
+                    ballVelocity[0] * ballVelocity[0] +
+                    ballVelocity[1] * ballVelocity[1] +
+                    ballVelocity[2] * ballVelocity[2]
+                );
+
+                for (let i = 0; i < 3; i++) {
+                    ballVelocity[i] = -ballVelocity[i];
+                    ballPosition[i] = (ballPosition[i] / distanceFromCenter) * (maxDistance - ballRadius);
+                }
+            }
+        }
+
+        function initBuffers(gl) {
+            // Create dodecahedron vertices
+            // Create ball vertices (sphere approximation)
+            const ballVertices = [];
+            const ballColors = [];
+            const phi = (1 + Math.sqrt(5)) / 2;
+            const dodecahedronVertices = [
+                // Front face
+                -1.0, phi, 0.0,
+                1.0, phi, 0.0,
+                0.0, 1.0, phi,
+
+                // Top pentagon faces
+                0.0, 1.0, phi,
+                1.0, phi, 0.0,
+                phi, 0.0, 1.0,
+
+                0.0, 1.0, phi,
+                phi, 0.0, 1.0,
+                1.0, -phi, 0.0,
+
+                // Side pentagon faces
+                1.0, phi, 0.0,
+                phi, 0.0, -1.0,
+                phi, 0.0, 1.0,
+
+                -1.0, phi, 0.0,
+                -phi, 0.0, 1.0,
+                -phi, 0.0, -1.0,
+
+                // Bottom pentagon faces
+                0.0, -1.0, -phi,
+                -1.0, -phi, 0.0,
+                1.0, -phi, 0.0,
+
+                0.0, -1.0, phi,
+                1.0, -phi, 0.0,
+                -1.0, -phi, 0.0,
+
+                // Back face
+                -1.0, phi, 0.0,
+                1.0, phi, 0.0,
+                0.0, 1.0, -phi
+            ];
+            gl.setPositionAttribute(gl, buffers, programInfo);
+            const positionBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(dodecahedronVertices), gl.STATIC_DRAW);
+
+
+            // Generate sphere vertices
+            for (let i = 0; i <= 30; i++) {
+                const lat = Math.PI * (-0.5 + i / 30);
+                for (let j = 0; j <= 30; j++) {
+                    const lon = 2 * Math.PI * j / 30;
+                    const x = Math.cos(lat) * Math.cos(lon);
+                    const y = Math.cos(lat) * Math.sin(lon);
+                    const z = Math.sin(lat);
+                    ballVertices.push(x * ballRadius, y * ballRadius, z * ballRadius);
+                    ballColors.push(1.0, 0.0, 0.0, 1.0); // Red color
+                }
+            }
+
+            const ballPositionBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, ballPositionBuffer);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(ballVertices), gl.STATIC_DRAW);
+
+            const ballColorBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, ballColorBuffer);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(ballColors), gl.STATIC_DRAW);
+
+            return {
+                dodecahedron: positionBuffer,
+                ball: {
+                    position: ballPositionBuffer,
+                    color: ballColorBuffer,
+                },
+            };
+        }
+
+        function drawScene(gl, programInfo, buffers) {
+            gl.clearColor(0.0, 0.0, 0.0, 1.0);
+            gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+            const fieldOfView = 45 * Math.PI / 180;
+            const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
+            const zNear = 0.1;
+            const zFar = 100.0;
+            const projectionMatrix = mat4.create();
+
+            mat4.perspective(projectionMatrix, fieldOfView, aspect, zNear, zFar);
+
+            // Draw dodecahedron
+            const modelViewMatrix = mat4.create();
+            mat4.translate(modelViewMatrix, modelViewMatrix, [0.0, 0.0, -6.0]);
+            mat4.rotate(modelViewMatrix, modelViewMatrix, rotation, [0, 1, 0]);
+
+            // Draw ball
+            const ballModelViewMatrix = mat4.create();
+            mat4.translate(ballModelViewMatrix, ballModelViewMatrix, 
+                [ballPosition[0], ballPosition[1], ballPosition[2]]);
+
+            // Set shader uniforms and draw
+            gl.useProgram(programInfo.program);
+            setPositionAttribute(gl, buffers, programInfo);
+            gl.uniformMatrix4fv(programInfo.uniformLocations.projectionMatrix, false, projectionMatrix);
+            gl.uniformMatrix4fv(programInfo.uniformLocations.modelViewMatrix, false, modelViewMatrix);
+
+            gl.drawArrays(gl.TRIANGLES, 0, 36);
+        }
+
+        function initShaderProgram(gl, vsSource, fsSource) {
+            const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vsSource);
+            const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fsSource);
+
+            const shaderProgram = gl.createProgram();
+            gl.attachShader(shaderProgram, vertexShader);
+            gl.attachShader(shaderProgram, fragmentShader);
+            gl.linkProgram(shaderProgram);
+
+            if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
+                alert('Unable to initialize the shader program: ' + gl.getProgramInfoLog(shaderProgram));
+                return null;
+            }
+
+            return shaderProgram;
+        }
+
+        function loadShader(gl, type, source) {
+            const shader = gl.createShader(type);
+            gl.shaderSource(shader, source);
+            gl.compileShader(shader);
+
+            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                alert('An error occurred compiling the shaders: ' + gl.getShaderInfoLog(shader));
+                gl.deleteShader(shader);
+                return null;
+            }
+
+            return shader;
+        }
+
+        window.onload = main;
+    </script>
+</body>
+</html>

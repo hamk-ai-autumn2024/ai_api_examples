@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusAI - Intelligent Solutions for Tomorrow</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #6e48aa;
+            --secondary: #9d50bb;
+            --accent: #4776e6;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --success: #4cc9f0;
+            --text: #333;
+            --text-light: #777;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 4px 15px rgba(110, 72, 170, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(110, 72, 170, 0.6);
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        h1, h2, h3, h4 {
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            font-weight: 600;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(110, 72, 170, 0.9), rgba(157, 80, 187, 0.9)), url('https://images.unsplash.com/photo-1677442135136-760c813a743d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+            color: white;
+            padding: 180px 0 100px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero p {
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-size: 1.2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+        
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+        
+        .hero-btns .btn {
+            min-width: 180px;
+        }
+        
+        .hero-btns .btn-outline {
+            border-color: white;
+            color: white;
+        }
+        
+        .hero-btns .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        /* Features Section */
+        .features {
+            background-color: white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        /* About Section */
+        .about {
+            background-color: #f5f7fa;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            position: relative;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+        
+        /* Services Section */
+        .services {
+            background-color: white;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+        
+        .service-content {
+            padding: 30px;
+        }
+        
+        .service-content h3 {
+            margin-bottom: 15px;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            background: linear-gradient(135deg, rgba(110, 72, 170, 0.9), rgba(157, 80, 187, 0.9)), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+        }
+        
+        .testimonials h2 {
+            color: white;
+        }
+        
+        .testimonials h2:after {
+            background: white;
+        }
+        
+        .testimonials p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial {
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            margin: 20px;
+        }
+        
+        .testimonial-content {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .author-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+        
+        .author-info p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+        
+        .cta h2 {
+            color: white;
+        }
+        
+        .cta h2:after {
+            display: none;
+        }
+        
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-column ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .footer-column p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-text, .about-image {
+                flex: none;
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 40px;
+                transition: left 0.3s ease;
+            }
+            
+            nav ul.active {
+                left: 0;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-btns .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .header-container {
+                padding: 15px 0;
+            }
+            
+            .hero {
+                padding: 150px 0 80px;
+            }
+            
+            .about-stats {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-brain"></i>
+                <span>NexusAI</span>
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Intelligent Solutions for Tomorrow</h1>
+            <p>Harness the power of artificial intelligence to transform your business and unlock new possibilities with our cutting-edge technology.</p>
+            <div class="hero-btns">
+                <a href="#contact" class="btn btn-primary">Get Started</a>
+                <a href="#features" class="btn btn-outline">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2>Why Choose NexusAI</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>Our AI processes data at unprecedented speeds, delivering real-time insights when you need them most.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Secure & Private</h3>
+                    <p>Enterprise-grade security protocols ensure your data remains confidential and protected at all times.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Continuous Learning</h3>
+                    <p>Our models improve over time, adapting to your needs and delivering increasingly accurate results.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2>About Our AI Technology</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Pioneering the Future of Artificial Intelligence</h3>
+                    <p>NexusAI was founded in 2018 with a simple mission: to make artificial intelligence accessible and beneficial for businesses of all sizes. Our team of PhD researchers and engineers have developed proprietary algorithms that outperform industry benchmarks.</p>
+                    <p>We combine cutting-edge machine learning techniques with practical business applications to create solutions that drive real results. Our technology stack includes deep neural networks, natural language processing, and computer vision capabilities.</p>
+                    
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">150+</div>
+                            <div class="stat-label">Clients Worldwide</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">98%</div>
+                            <div class="stat-label">Accuracy Rate</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">Support Available</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" alt="AI Technology">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2>Our AI Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1655720828012-585df65945f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Predictive Analytics">
+                    </div>
+                    <div class="service-content">
+                        <h3>Predictive Analytics</h3>
+                        <p>Forecast trends, anticipate customer needs, and make data-driven decisions with our advanced predictive models.</p>
+                        <a href="#" class="btn btn-outline" style="margin-top: 15px;">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1655720827860-49ebab1d1f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Natural Language Processing">
+                    </div>
+                    <div class="service-content">
+                        <h3>Natural Language Processing</h3>
+                        <p>Extract insights from text data, automate customer service, and analyze sentiment at scale.</p>
+                        <a href="#" class="btn btn-outline" style="margin-top: 15px;">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1655720827860-49ebab1d1f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Computer Vision">
+                    </div>
+                    <div class="service-content">
+                        <h3>Computer Vision</h3>
+                        <p>Automate visual inspection, recognize objects and patterns, and extract valuable insights from images.</p>
+                        <a href="#" class="btn btn-outline" style="margin-top: 15px;">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2>What Our Clients Say</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        "NexusAI transformed our customer service operations. Their natural language processing reduced response times by 70% while improving customer satisfaction scores."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Sarah Johnson">
+                        </div>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>CEO, TechSolutions Inc.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="contact">
+        <div class="container">
+            <h2>Ready to Transform Your Business with AI?</h2>
+            <p>Schedule a consultation with our AI experts to discover how our solutions can drive growth and efficiency for your organization.</p>
+            <a href="#" class="btn btn-outline">Get Started Today</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>NexusAI</h3>
+                    <p>Pioneering artificial intelligence solutions that empower businesses to thrive in the digital age.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Predictive Analytics</a></li>
+                        <li><a href="#">Natural Language Processing</a></li>
+                        <li><a href="#">Computer Vision</a></li>
+                        <li><a href="#">AI Consulting</a></li>
+                        <li><a href="#">Custom Solutions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 AI Boulevard, Tech City</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@nexusai.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 NexusAI. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Simple Testimonial Slider (would be enhanced with a proper library in production)
+        const testimonials = [
+            {
+                content: "NexusAI transformed our customer service operations. Their natural language processing reduced response times by 70% while improving customer satisfaction scores.",
+                name: "Sarah Johnson",
+                title: "CEO, TechSolutions Inc.",
+                image: "https://randomuser.me/api/portraits/women/45.jpg"
+            },
+            {
+                content: "The predictive analytics tools from NexusAI helped us optimize our supply chain, reducing costs by 25% in just three months. Incredible results!",
+                name: "Michael Chen",
+                title: "COO, Global Retail Corp",
+                image: "https://randomuser.me/api/portraits/men/32.jpg"
+            },
+            {
+                content: "We've worked with several AI providers, but NexusAI stands out for their technical expertise and commitment to our success. Truly a partnership.",
+                name: "Emma Rodriguez",
+                title: "CTO, FinTech Innovations",
+                image: "https://randomuser.me/api/portraits/women/68.jpg"
+            }
+        ];
+        
+        let currentTestimonial = 0;
+        const testimonialSlider = document.querySelector('.testimonial-slider');
+        
+        function showTestimonial(index) {
+            const testimonial = testimonials[index];
+            testimonialSlider.innerHTML = `
+                <div class="testimonial">
+                    <div class="testimonial-content">"${testimonial.content}"</div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="${testimonial.image}" alt="${testimonial.name}">
+                        </div>
+                        <div class="author-info">
+                            <h4>${testimonial.name}</h4>
+                            <p>${testimonial.title}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Rotate testimonials every 5 seconds
+        setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        }, 5000);
+        
+        // Initialize first testimonial
+        showTestimonial(0);
+    </script>
+</body>
+</html>
