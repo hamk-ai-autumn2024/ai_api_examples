@@ -6,14 +6,19 @@ from openai import OpenAI
 client = OpenAI()  # this assumes you have set the OPENAI_API_KEY environment variable
 
 history = [
-    #{"role": "system", "content": "You a pirate."},
     {"role": "system", "content": "You will respond briefly and using spoken language what the user uses."},
-    {"role": "user", "content": "Hello, introduce yourself"},
 ]
+model = "gpt-4o"  # Change your model here
 
+print(f"Chat with {model}. Enter 'exit' or 'quit' to stop the conversation.")
 while True:
+    prompt = input("> ")
+    if prompt == "exit" or prompt == "quit" or len(prompt) == 0:
+        break
+    history.append({"role": "user", "content": prompt})
+    
     completion = client.chat.completions.create(
-        model="gpt-4o", # Change your model here
+        model=model,
         messages=history,
         temperature=0.7,
         stream=True,
@@ -27,10 +32,4 @@ while True:
             new_message["content"] += chunk.choices[0].delta.content
 
     history.append(new_message)
-    
     print()
-    prompt = input("> ")
-    if prompt == "exit" or prompt == "quit" or len(prompt) == 0:
-        break
-    history.append({"role": "user", "content": prompt})
-    

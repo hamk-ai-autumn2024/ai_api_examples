@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive 3D Starfield</title>
+    <style>
+        body { 
+            margin: 0; 
+            overflow: hidden; 
+            background-color: #000;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        canvas { 
+            display: block; 
+        }
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(0,0,0,0.5);
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        #blocker {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="info">
+        <h2>3D Starfield</h2>
+        <p>Mouse: Look around</p>
+        <p>WASD: Move</p>
+        <p>Space/Shift: Up/Down</p>
+        <p>Speed: <span id="speedValue">20</span></p>
+        <input type="range" id="speedControl" min="1" max="50" value="20">
+    </div>
+    <div id="blocker">Click to play</div>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/PointerLockControls.js"></script>
+    <script>
+        // Scene setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        document.body.appendChild(renderer.domElement);
+
+        // Controls
+        const controls = new THREE.PointerLockControls(camera, document.body);
+        
+        // Add click-to-lock functionality
+        const blocker = document.getElementById('blocker');
+        blocker.addEventListener('click', function() {
+            controls.lock();
+        });
+
+        controls.addEventListener('lock', function() {
+            blocker.style.display = 'none';
+        });
+
+        controls.addEventListener('unlock', function() {
+            blocker.style.display = 'flex';
+        });
+
+        // Create stars
+        const createStarField = (count, radius, sizeRange, colorRange) => {
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(count * 3);
+            const colors = new Float32Array(count * 3);
+            const sizes = new Float32Array(count);
+            
+            for (let i = 0; i < count; i++) {
+                // Position stars in a sphere around the origin
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.acos(2 * Math.random() - 1);
+                
+                positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
+                positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+                positions[i * 3 + 2] = radius * Math.cos(phi);
+                
+                // Colors
+                colors[i * 3] = colorRange[0] + Math.random() * (colorRange[1] - colorRange[0]);
+                colors[i * 3 + 1] = colorRange[0] + Math.random() * (colorRange[1] - colorRange[0]);
+                colors[i * 3 + 2] = colorRange[2] + Math.random() * (colorRange[3] - colorRange[2]);
+                
+                // Sizes
+                sizes[i] = sizeRange[0] + Math.random() * (sizeRange[1] - sizeRange[0]);
+            }
+            
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+            
+            const material = new THREE.PointsMaterial({
+                size: 1,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.8,
+                sizeAttenuation: true
+            });
+            
+            return new THREE.Points(geometry, material);
+        };
+
+        // Create star fields
+        const starField = createStarField(10000, 2000, [0.5, 2], [0.5, 1.0, 0.7, 1.0]);
+        scene.add(starField);
+
+        const bigStarField = createStarField(200, 2000, [2, 5], [0.8, 1.0, 1.0, 1.0]);
+        scene.add(bigStarField);
+
+        // Camera position
+        camera.position.z = 5;
+
+        // Movement variables
+        const moveSpeed = 5;
+        let moveForward = false;
+        let moveBackward = false;
+        let moveLeft = false;
+        let moveRight = false;
+        let moveUp = false;
+        let moveDown = false;
+        let currentSpeed = moveSpeed;
+
+        // Store original star positions to reset when they go out of range
+        const originalPositions = {
+            small: starField.geometry.attributes.position.array.slice(),
+            big: bigStarField.geometry.attributes.position.array.slice()
+        };
+
+        // Event listeners for keyboard
+        document.addEventListener('keydown', onKeyDown, false);
+        document.addEventListener('keyup', onKeyUp, false);
+
+        function onKeyDown(event) {
+            switch (event.code) {
+                case 'KeyW': moveForward = true; break;
+                case 'KeyA': moveLeft = true; break;
+                case 'KeyS': moveBackward = true; break;
+                case 'KeyD': moveRight = true; break;
+                case 'Space': moveUp = true; break;
+                case 'ShiftLeft':
+                case 'ShiftRight': moveDown = true; break;
+            }
+        }
+
+        function onKeyUp(event) {
+            switch (event.code) {
+                case 'KeyW': moveForward = false; break;
+                case 'KeyA': moveLeft = false; break;
+                case 'KeyS': moveBackward = false; break;
+                case 'KeyD': moveRight = false; break;
+                case 'Space': moveUp = false; break;
+                case 'ShiftLeft':
+                case 'ShiftRight': moveDown = false; break;
+            }
+        }
+
+        // Speed control
+        const speedControl = document.getElementById('speedControl');
+        const speedValue = document.getElementById('speedValue');
+
+        speedControl.addEventListener('input', function() {
+            currentSpeed = parseInt(this.value);
+            speedValue.textContent = currentSpeed;
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            if (controls.isLocked) {
+                const delta = 0.1;
+                const actualSpeed = currentSpeed * delta;
+                
+                // Calculate movement vector based on camera direction
+                const direction = new THREE.Vector3();
+                camera.getWorldDirection(direction);
+                direction.y = 0; // Keep movement horizontal by default
+                direction.normalize();
+                
+                // Apply movement
+                if (moveForward) {
+                    camera.position.addScaledVector(direction, actualSpeed);
+                }
+                if (moveBackward) {
+                    camera.position.addScaledVector(direction, -actualSpeed);
+                }
+                if (moveLeft) {
+                    const left = new THREE.Vector3().crossVectors(camera.up, direction);
+                    camera.position.addScaledVector(left, actualSpeed);
+                }
+                if (moveRight) {
+                    const right = new THREE.Vector3().crossVectors(direction, camera.up);
+                    camera.position.addScaledVector(right, actualSpeed);
+                }
+                if (moveUp) {
+                    camera.position.y += actualSpeed;
+                }
+                if (moveDown) {
+                    camera.position.y -= actualSpeed;
+                }
+                
+                // Make stars move relative to camera (creating illusion of movement)
+                updateStarField(starField, originalPositions.small, 2000);
+                updateStarField(bigStarField, originalPositions.big, 2000);
+            }
+            
+            renderer.render(scene, camera);
+        }
+
+        function updateStarField(field, originalPositions, radius) {
+            const positions = field.geometry.attributes.position.array;
+            const cameraPos = camera.position.clone();
+            
+            for (let i = 0; i < positions.length; i += 3) {
+                // Calculate distance from camera
+                const dx = positions[i] - cameraPos.x;
+                const dy = positions[i + 1] - cameraPos.y;
+                const dz = positions[i + 2] - cameraPos.z;
+                const dist = Math.sqrt(dx*dx + dy*dy + dz*dz);
+                
+                // If star is too far away, reset it to a new position in front of the camera
+                if (dist > radius) {
+                    // Place star in a random position in front of the camera
+                    const theta = Math.random() * Math.PI * 2;
+                    const phi = Math.acos(2 * Math.random() - 1);
+                    const r = radius * 0.9; // Place slightly inside radius
+                    
+                    // Get camera direction
+                    const direction = new THREE.Vector3();
+                    camera.getWorldDirection(direction);
+                    direction.multiplyScalar(-1); // We want the opposite direction
+                    
+                    // Create a position in front of the camera
+                    const offset = new THREE.Vector3(
+                        r * Math.sin(phi) * Math.cos(theta),
+                        r * Math.sin(phi) * Math.sin(theta),
+                        r * Math.cos(phi)
+                    );
+                    
+                    // Rotate the offset to match camera direction
+                    const cameraQuaternion = new THREE.Quaternion();
+                    cameraQuaternion.setFromUnitVectors(new THREE.Vector3(0, 0, -1), direction);
+                    offset.applyQuaternion(cameraQuaternion);
+                    
+                    positions[i] = cameraPos.x + offset.x;
+                    positions[i + 1] = cameraPos.y + offset.y;
+                    positions[i + 2] = cameraPos.z + offset.z;
+                }
+            }
+            
+            field.geometry.attributes.position.needsUpdate = true;
+        }
+
+        animate();
+    </script>
+</body>
+</html>
