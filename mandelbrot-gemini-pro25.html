@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>p5.js Mandelbrot Explorer (Fixed)</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevent scrollbars */
+            background-color: #222; /* Dark background for contrast */
+            color: #eee;
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #canvas-container {
+            position: relative; /* Needed for positioning text overlay */
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        #info-overlay {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            line-height: 1.4;
+            pointer-events: none; /* Allow clicks to pass through */
+        }
+        #controls-info {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            line-height: 1.3;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container">
+        <!-- p5.js canvas will be created here -->
+        <div id="info-overlay">Loading...</div>
+        <div id="controls-info">
+            <b>Controls:</b><br>
+            Drag: Pan | Scroll: Zoom<br>
+            Arrows: Pan | +/-: Zoom<br>
+            [ / ]: Iterations
+        </div>
+    </div>
+
+    <script>
+        // --- Configurable Parameters ---
+        let maxIterations = 100;
+        const initialCenterX = -0.75;
+        const initialCenterY = 0.0;
+        const initialRangeX = 3.5; // Initial width of the view in the complex plane
+        const zoomFactor = 1.5; // How much to zoom in/out with each step
+        const panSpeed = 0.05; // Arrow key pan speed (fraction of view width/height) - Reduced slightly
+
+        // --- State Variables ---
+        let centerX, centerY;
+        let rangeX, rangeY; // Current width/height of the view in the complex plane
+        let zoomLevel = 1.0;
+        let redrawNeeded = true; // Flag to recalculate the set
+
+        // Panning state
+        let isPanning = false;
+        let panStartX, panStartY; // Mouse position at start of drag
+        let panStartCenterX, panStartCenterY; // View center at start of drag
+
+        let currentCanvasWidth, currentCanvasHeight; // Store canvas dimensions
+
+        // --- p5.js Sketch ---
+        function setup() {
+            let canvasSize = min(windowWidth * 0.9, windowHeight * 0.9);
+            // Ensure integer height
+            currentCanvasWidth = floor(canvasSize);
+            currentCanvasHeight = floor(canvasSize * (9/16)); // Adjust aspect ratio if needed
+            let canvas = createCanvas(currentCanvasWidth, currentCanvasHeight);
+            canvas.parent('canvas-container'); // Place canvas in the div
+            pixelDensity(1); // Use 1:1 pixel mapping for performance and simpler indexing
+
+            centerX = initialCenterX;
+            centerY = initialCenterY;
+            updateRanges(); // Calculate initial rangeX/rangeY based on zoom
+
+            colorMode(HSB, maxIterations, 1, 1); // Use HSB: Hue (0-maxIter), Sat (0-1), Bri (0-1)
+            noStroke(); // We'll draw pixels directly
+
+            // Initialize text display
+            updateInfoOverlay();
+            console.log(`Canvas created: ${currentCanvasWidth}x${currentCanvasHeight}`);
+        }
+
+        function draw() {
+            if (redrawNeeded) {
+                console.time("Mandelbrot Calculation"); // Time the calculation
+                // background(0); // Clearing might cause flicker, direct pixel writing is enough
+
+                loadPixels(); // Prepare pixel buffer
+
+                // Loop through every pixel on the canvas
+                // Use stored dimensions for consistency
+                for (let px = 0; px < currentCanvasWidth; px++) {
+                    for (let py = 0; py < currentCanvasHeight; py++) {
+
+                        // Map pixel coordinates to complex number 'c' = ca + cb*i
+                        // map(value, start1, stop1, start2, stop2)
+                        const ca = map(px, 0, currentCanvasWidth, centerX - rangeX / 2, centerX + rangeX / 2);
+                        // *** FIX: Flip the imaginary axis mapping ***
+                        // Map py=0 (top) to centerY + rangeY/2 (imaginary top)
+                        // Map py=height (bottom) to centerY - rangeY/2 (imaginary bottom)
+                        const cb = map(py, 0, currentCanvasHeight, centerY + rangeY / 2, centerY - rangeY / 2);
+
+                        let n = 0; // Iteration count
+                        let za = 0; // Real part of z (z = za + zb*i)
+                        let zb = 0; // Imaginary part of z
+                        let zaa = 0; // za*za
+                        let zbb = 0; // zb*zb
+
+                        // Mandelbrot iteration: z = z^2 + c
+                        while (n < maxIterations) {
+                            zaa = za * za;
+                            zbb = zb * zb;
+
+                            // Check if |z|^2 > 4 (escape condition)
+                            if (zaa + zbb > 4.0) {
+                                break; // Escaped
+                            }
+
+                            // Calculate z^2 + c
+                            // za_temp = zaa - zbb + ca; // Real part of z^2 + c
+                            // zb = 2 * za * zb + cb;    // Imaginary part of z^2 + c
+                            // za = za_temp;
+                            // Optimization: Avoid temporary variable for za
+                            zb = 2 * za * zb + cb;
+                            za = zaa - zbb + ca;
+
+
+                            n++;
+                        }
+
+                        // --- Coloring ---
+                        let hue, saturation, brightness;
+                        const index = (px + py * currentCanvasWidth) * 4; // Index in the pixels array
+
+                        if (n === maxIterations) {
+                            // Inside the set - Black
+                            pixels[index + 0] = 0;
+                            pixels[index + 1] = 0;
+                            pixels[index + 2] = 0;
+                            pixels[index + 3] = 255;
+                        } else {
+                            // Outside the set - color based on escape time 'n'
+                            // Map 'n' to hue. Use sqrt for better distribution if desired.
+                            hue = map(sqrt(n), 0, sqrt(maxIterations), 0, maxIterations);
+                            saturation = 1; // Full saturation
+                            brightness = 1; // Full brightness
+
+                            const pixelColor = color(hue, saturation, brightness);
+
+                            pixels[index + 0] = red(pixelColor);
+                            pixels[index + 1] = green(pixelColor);
+                            pixels[index + 2] = blue(pixelColor);
+                            pixels[index + 3] = 255; // Alpha (fully opaque)
+                        }
+                    }
+                }
+
+                updatePixels(); // Apply changes from the pixel buffer to the canvas
+                redrawNeeded = false; // Calculation done
+                updateInfoOverlay(); // Update displayed info
+                console.timeEnd("Mandelbrot Calculation");
+            }
+            // No drawing needed if redrawNeeded is false - canvas stays as is.
+        }
+
+        // --- Helper Functions ---
+
+        function updateRanges() {
+            rangeX = initialRangeX / zoomLevel;
+            // Ensure rangeY calculation uses the current canvas dimensions
+            if (currentCanvasWidth > 0 && currentCanvasHeight > 0) {
+                rangeY = (currentCanvasHeight / currentCanvasWidth) * rangeX; // Maintain aspect ratio
+            } else {
+                rangeY = rangeX; // Fallback if dimensions aren't set yet
+            }
+        }
+
+        function updateInfoOverlay() {
+            const infoDiv = document.getElementById('info-overlay');
+            if (infoDiv) {
+                infoDiv.innerHTML = `
+                    Center: (${centerX.toFixed(8)}, ${centerY.toFixed(8)})<br>
+                    Zoom: ${zoomLevel.toExponential(3)} (RangeX: ${rangeX.toExponential(3)})<br>
+                    Max Iterations: ${maxIterations}
+                `;
+            }
+        }
+
+        // --- Event Handlers ---
+
+        function mousePressed() {
+            // Check bounds using current dimensions
+            if (mouseX > 0 && mouseX < currentCanvasWidth && mouseY > 0 && mouseY < currentCanvasHeight) {
+                isPanning = true;
+                panStartX = mouseX;
+                panStartY = mouseY;
+                panStartCenterX = centerX;
+                panStartCenterY = centerY;
+            }
+        }
+
+        function mouseDragged() {
+            if (isPanning) {
+                // Calculate drag distance in pixels
+                const dx = mouseX - panStartX;
+                const dy = mouseY - panStartY;
+
+                // Convert pixel distance to complex plane distance
+                // Use current dimensions for mapping
+                const deltaCX = map(dx, 0, currentCanvasWidth, 0, rangeX);
+                // map dy=0 to deltaCY=0, dy=height to deltaCY=rangeY
+                // Since cb mapping is flipped, dragging down (positive dy) should decrease centerY
+                const deltaCY = map(dy, 0, currentCanvasHeight, 0, rangeY);
+
+                // Update center (subtract deltaCX because dragging right moves view left)
+                // Update center (subtract deltaCY because dragging down moves view up in complex plane now)
+                centerX = panStartCenterX - deltaCX;
+                centerY = panStartCenterY - deltaCY; // Changed from + to - due to flipped cb mapping
+
+
+                redrawNeeded = true;
+            }
+        }
+
+        function mouseReleased() {
+            if (isPanning) {
+                isPanning = false;
+                // Final redraw is triggered by the last mouseDragged call
+            }
+        }
+
+        function mouseWheel(event) {
+            // Check bounds using current dimensions
+             if (mouseX > 0 && mouseX < currentCanvasWidth && mouseY > 0 && mouseY < currentCanvasHeight) {
+                // Map mouse position to complex coordinates BEFORE zoom
+                const mouseCX = map(mouseX, 0, currentCanvasWidth, centerX - rangeX / 2, centerX + rangeX / 2);
+                // Use the same FLIPPED mapping for mouse CY as for cb
+                const mouseCY = map(mouseY, 0, currentCanvasHeight, centerY + rangeY / 2, centerY - rangeY / 2);
+
+                let currentZoomFactor = 1.0;
+                if (event.delta < 0) { // Zoom in (scroll up/forward)
+                    currentZoomFactor = zoomFactor;
+                } else { // Zoom out (scroll down/backward)
+                    currentZoomFactor = 1.0 / zoomFactor;
+                }
+                 // Prevent zooming out too much which can cause precision issues
+                const nextZoomLevel = zoomLevel * currentZoomFactor;
+                if (nextZoomLevel < 0.1) return false; // Limit minimum zoom if desired
+
+
+                zoomLevel = nextZoomLevel;
+
+
+                // Adjust center so the point under the mouse stays under the mouse
+                centerX = mouseCX + (centerX - mouseCX) / currentZoomFactor;
+                centerY = mouseCY + (centerY - mouseCY) / currentZoomFactor;
+
+                updateRanges();
+                redrawNeeded = true;
+                return false; // Prevent default browser page scrolling
+            }
+        }
+
+        function keyPressed() {
+            let needsUpdate = false; // General flag
+            let viewChanged = false; // Flag for changes needing range/redraw update
+
+            switch (keyCode) {
+                case UP_ARROW:
+                    // Move view up => Increase centerY
+                    centerY += rangeY * panSpeed;
+                    viewChanged = true;
+                    break;
+                case DOWN_ARROW:
+                    // Move view down => Decrease centerY
+                    centerY -= rangeY * panSpeed;
+                    viewChanged = true;
+                    break;
+                case LEFT_ARROW:
+                     // Move view left => Decrease centerX
+                    centerX -= rangeX * panSpeed;
+                    viewChanged = true;
+                    break;
+                case RIGHT_ARROW:
+                     // Move view right => Increase centerX
+                    centerX += rangeX * panSpeed;
+                    viewChanged = true;
+                    break;
+            }
+
+             switch (key) {
+                case '=': // '+' key (often requires shift)
+                case '+':
+                    zoomLevel *= zoomFactor;
+                    viewChanged = true;
+                    break;
+                case '-': // '-' key
+                case '_':
+                    const nextZoomLevel = zoomLevel / zoomFactor;
+                    if (nextZoomLevel >= 0.1) { // Prevent excessive zoom out
+                       zoomLevel = nextZoomLevel;
+                       viewChanged = true;
+                    }
+                    break;
+                case ']': // Increase iterations
+                case '.':
+                     maxIterations = floor(maxIterations * 1.2) + 5; // Increase faster
+                     // Recalculate HSB color mode range
+                     colorMode(HSB, maxIterations, 1, 1);
+                     needsUpdate = true; // Iterations changed, needs full redraw
+                     break;
+                 case '[': // Decrease iterations
+                 case ',':
+                     maxIterations = floor(maxIterations / 1.2);
+                     maxIterations = max(20, maxIterations); // Minimum iterations
+                      // Recalculate HSB color mode range
+                     colorMode(HSB, maxIterations, 1, 1);
+                     needsUpdate = true; // Iterations changed, needs full redraw
+                     break;
+            }
+
+            if (viewChanged) {
+                 updateRanges(); // Update ranges if zoom or pan changed view extents
+                 redrawNeeded = true;
+            } else if (needsUpdate) {
+                 redrawNeeded = true; // Redraw if only iterations changed
+            }
+
+            // Prevent arrow keys/spacebar from scrolling the page
+            if ([UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, 32].includes(keyCode) && viewChanged) {
+                 return false; // Prevent default only if we handled the key
+            }
+             // Prevent +/- scrolling/zooming page
+             if (['+', '=', '-', '_'].includes(key) && viewChanged) {
+                 return false;
+             }
+        }
+
+        // Adjust canvas size if window is resized
+        function windowResized() {
+            let newSize = min(windowWidth * 0.9, windowHeight * 0.9);
+            // Ensure integer height on resize too
+            currentCanvasWidth = floor(newSize);
+            currentCanvasHeight = floor(newSize * (9 / 16));
+            resizeCanvas(currentCanvasWidth, currentCanvasHeight);
+
+            console.log(`Canvas resized: ${currentCanvasWidth}x${currentCanvasHeight}`);
+
+            updateRanges(); // Ranges depend on aspect ratio
+            // Need to reset color mode in case maxIterations changed while browser was small? Unlikely but safe.
+            colorMode(HSB, maxIterations, 1, 1);
+            redrawNeeded = true; // Redraw needed after resize
+        }
+
+    </script>
+
+</body>
+</html>
