@@ -49,12 +49,8 @@ print(output)
 end_time = time.time()
 time_consumed = end_time - start_time
 print(f"Time consumed: {time_consumed} seconds")
-for item in output:
-    try:
-        file_path = find_new_file_name(f"upscale.png")
-        with open(file_path, "wb") as file:
-            file.write(item.read())
-            print(f"Image saved to {file_path}")
-    except Exception as e:
-        print(f"Error writing file: {e}")
-        continue
+print("Reading image data...")
+image_data = output.read()
+output_file_name = find_new_file_name("upscale.png")
+save_binary_file(image_data, output)
+print(f"Image saved as: {output_file_name}")

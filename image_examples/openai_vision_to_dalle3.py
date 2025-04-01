@@ -40,7 +40,7 @@ payload = {
     ],
     "max_tokens": 100,
 }
-print("Sending request to OpenAI Visition API...")
+print("Sending request to OpenAI Vision API...")
 response = requests.post(
     "https://api.openai.com/v1/chat/completions", headers=headers, json=payload
 )
