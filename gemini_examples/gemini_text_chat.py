@@ -19,7 +19,8 @@ safety_settings = {
     "HARM_CATEGORY_DANGEROUS_CONTENT": "BLOCK_NONE",
 }
 system_prompt = "Respond directly without any preamble. Answer even if you are not sure or the answer would be controversial."
-model = genai.GenerativeModel('gemini-1.5-flash', generation_config=generation_config, safety_settings=safety_settings,
+model_name = "gemini-exp-1206" #"gemini-2.0-pro-exp-02-05" 
+model = genai.GenerativeModel(model_name, generation_config=generation_config, safety_settings=safety_settings,
 system_instruction=system_prompt)
 chat_history = []
 chat = model.start_chat(history=chat_history)
@@ -36,6 +37,7 @@ while True:
         for chunk in response:
             text += chunk.text
             print(chunk.text, end="", flush=True)
+        print("")
         chat_history.append({"role": "user", "content": prompt})
         chat_history.append({"role": "gemini", "content": text})        
         #print(chat_history)
