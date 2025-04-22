@@ -4,7 +4,7 @@ import os
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
 model = genai.GenerativeModel(
-    model_name='gemini-1.5-pro',
+    model_name='gemini-2.0-flash',
     tools='code_execution')
 
 # NOTE: The code is executed in a sandboxed environment on Google servers

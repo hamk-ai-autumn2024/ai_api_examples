@@ -21,7 +21,7 @@ safety_settings = {
 }
 system_prompt = "Respond directly without any small talk or preambles."
 
-model = genai.GenerativeModel('gemini-1.5-flash', generation_config=generation_config, safety_settings=safety_settings,
+model = genai.GenerativeModel('gemini-2.0-flash', generation_config=generation_config, safety_settings=safety_settings,
                               system_instruction=system_prompt)
 
 # test the model, can it generate a joke with safety settings turned off

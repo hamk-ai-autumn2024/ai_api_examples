@@ -11,7 +11,7 @@ image3 = PIL.Image.open("gomoto3.jpg")
 
 print(f"Uploaded files: {image1.filename}, {image2.filename}, {image3.filename}")
 print("Generating...")
-model = genai.GenerativeModel(model_name="gemini-1.5-flash")
+model = genai.GenerativeModel(model_name="gemini-2.0-flash")
 # Prompt the model with text and the previously uploaded image.
 response = model.generate_content(["Invent advertising slogans for the following images", image1, image2, image3])
 print(response.text)
