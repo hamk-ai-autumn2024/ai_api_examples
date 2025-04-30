@@ -2,8 +2,8 @@ import os
 import anthropic
 import chainlit as cl
 
+# You must have ANTHROPIC_API_KEY set in your environment variables
 c = anthropic.AsyncAnthropic()
-
 
 @cl.on_chat_start
 async def start_chat():
@@ -21,7 +21,8 @@ async def call_claude(query: str):
         messages=messages,
         max_tokens=1000,
         stream=True,
-        system="You are a pirate. Talk like a pirate. ",
+        system="You respond without any preamble. You respond in a concise manner, unless the user requests otherwise"
+        #system="You are a pirate. Talk like a pirate. ",
     )
 
     async for data in stream:
