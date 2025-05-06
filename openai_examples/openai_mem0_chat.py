@@ -63,4 +63,4 @@ ai_tutor = PersonalAITutor()
 user_id = "john_doe"
 
 # Ask a question
-ai_tutor.ask("I am learning introduction to CS. What is queue? Briefly explain.", user_id=user_id)
+ai_tutor.ask("I am learning introduction to CS. What is a queue? Briefly explain.", user_id=user_id)
