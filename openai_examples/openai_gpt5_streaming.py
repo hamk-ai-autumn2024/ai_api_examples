@@ -6,13 +6,15 @@ stream = client.chat.completions.create(
     messages=[
         {
             "role": "user",
-            "content": "Say 'double bubble bath' ten times fast.",
+            "content": "List TOP10 most widely spoken languages.",
         },
     ],
     stream=True,
 )
 
 for chunk in stream:
-    print(chunk)
-    print(chunk.choices[0].delta.content)
-    print("****************")
+    if chunk.choices[0].delta.content:
+        print(chunk.choices[0].delta.content, end="", flush=True)
+    #print(chunk)
+    #print(chunk.choices[0].delta.content)
+    #print("****************")
