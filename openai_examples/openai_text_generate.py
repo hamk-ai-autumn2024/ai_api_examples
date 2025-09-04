@@ -9,8 +9,8 @@ completion = client.chat.completions.create(
         {"role": "system", "content": "Answer directly without any preamble."},
         {"role": "user", "content": "Explain blood types and their compatibility."},
     ],
-    temperature=0.9,
-    max_tokens=1000,
+    temperature=0.3,
+    max_completion_tokens=1000,
     stream=False,  # default, wait until everything is ready
 )
 text = completion.choices[0].message.content

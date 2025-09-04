@@ -11,7 +11,7 @@ completion = client.chat.completions.create(
         {"role": "user", "content": "Write a short article about Finland, including a table of most important statistics of the country."},
     ],
     temperature=0.9,
-    max_tokens=1000,
+    max_completion_tokens=1000,
     stream=False,  # default, wait until everything is ready
 )
 markdown_text = completion.choices[0].message.content

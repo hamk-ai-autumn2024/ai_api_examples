@@ -13,8 +13,8 @@ completion = client.chat.completions.create(
 
         {"role": "user", "content": "Selitä esimerkein suomen kielen adjektiivien vertailumuodot."}
     ],
-    temperature=0.9,
-    max_tokens=500,
+    temperature=0.5,
+    max_completion_tokens=500,
     # top_p=1,
     # presence_penalty=0.5,
     # frequency_penalty=0.5,
