@@ -18,7 +18,6 @@ async def start():
     # Initialize settings in user session
     cl.user_session.set("system_prompt", DEFAULT_SYSTEM_PROMPT)
     cl.user_session.set("temperature", DEFAULT_TEMPERATURE)
-    cl.user_session.set("model", "moonshotai/kimi-k2:free")
     # Initialize chat history with system prompt
     cl.user_session.set(
         "messages",
@@ -27,21 +26,6 @@ async def start():
     
     # Create side panel settings
     settings = await cl.ChatSettings([
-        cl.input_widget.Select(
-            id="model",
-            label="Model",
-            values=[
-                "deepseek/deepseek-chat-v3.1:free",
-                "deepseek/deepseek-r1-0528:free",
-                "qwen/qwen3-coder:free",
-                "qwen/qwen3-235b-a22b:free",
-                "qwen/qwen3-30b-a3b:free",
-                "moonshotai/kimi-k2:free",
-                "google/gemini-2.0-flash-exp:free",
-            ],
-            initial_index=5,
-            description="Choose the model to use"
-        ),
         cl.input_widget.TextInput(
             id="system_prompt",
             label="System Prompt",
@@ -65,7 +49,6 @@ async def setup_agent(settings):
     # Update session settings when user changes them
     cl.user_session.set("system_prompt", settings["system_prompt"])
     cl.user_session.set("temperature", settings["temperature"])
-    cl.user_session.set("model", settings["model"])
     # Ensure the first message in history is the updated system prompt
     messages = cl.user_session.get("messages") or []
     if not messages:
@@ -80,7 +63,6 @@ async def setup_agent(settings):
 async def main(message: cl.Message):
     # Get current settings
     temperature = cl.user_session.get("temperature")
-    model = cl.user_session.get("model") or "moonshotai/kimi-k2:free"
     
     # Retrieve and append to chat history
     messages = cl.user_session.get("messages") or []
@@ -95,7 +77,7 @@ async def main(message: cl.Message):
     try:
         # Stream response from OpenRouter
         stream = await client.chat.completions.create(
-            model=model,
+            model="moonshotai/kimi-k2:free",
             messages=messages,
             temperature=temperature,
             stream=True
