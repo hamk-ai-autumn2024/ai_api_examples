@@ -9,7 +9,7 @@ class Recipe(typing.TypedDict):
 
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
-model = genai.GenerativeModel("gemini-2.0-flash")
+model = genai.GenerativeModel("gemini-2.5-flash")
 result = model.generate_content(
     "List a few popular cookie recipes.",
     generation_config=genai.GenerationConfig(

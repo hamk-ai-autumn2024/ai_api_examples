@@ -8,7 +8,7 @@ prompt = "Write song lyrics about a person who is in love with a robot. Make cho
 with client.messages.stream(
     max_tokens=1024,
     messages=[{"role": "user", "content": prompt}],
-    model="claude-3-5-sonnet-20240620",
+    model="claude-sonnet-4-20250514",
 ) as stream:
   for text in stream.text_stream:
       print(text, end="", flush=True)

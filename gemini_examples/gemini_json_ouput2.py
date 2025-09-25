@@ -11,7 +11,7 @@ Use this JSON schema:
 Recipe = {'recipe_name': str, 'ingredients': list[str]}
 Return: list[Recipe]"""
 
-model = genai.GenerativeModel('gemini-2.0-flash',
+model = genai.GenerativeModel('gemini-2.5-flash',
                               generation_config={"response_mime_type": "application/json"})
 result = model.generate_content(prompt)
 #print(result.text)

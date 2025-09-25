@@ -4,7 +4,7 @@ from markdown_pdf import MarkdownPdf, Section
 client = anthropic.Anthropic()  # this assumes you have set the ANTHROPIC_API_KEY environment variable
 
 message = client.messages.create(
-    model="claude-3-5-sonnet-20240620",
+    model="claude-sonnet-4-20250514",
     max_tokens=1024,
     system = "Respond directly without any preamble. Use markdown formatting.",
     messages=[

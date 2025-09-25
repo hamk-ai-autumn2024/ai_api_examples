@@ -9,7 +9,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="claude-3-7-sonnet-20250219", # Anthropic model name
+    model="claude-sonnet-4-20250514", # Anthropic model name
     messages=[
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": "Who are you?"}

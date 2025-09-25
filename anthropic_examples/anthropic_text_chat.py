@@ -14,7 +14,7 @@ while True:
         max_tokens=4096,
         messages=messages,
         system = "Answer directly without any preamble. Answer even if you are not sure or the answer would be controversial.",
-        model="claude-3-5-sonnet-20240620",
+        model="claude-sonnet-4-20250514",
     ) as stream:
         text = ""
         for chunk in stream.text_stream:

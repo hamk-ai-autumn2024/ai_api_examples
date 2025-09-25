@@ -19,7 +19,7 @@ safety_settings = {
     "HARM_CATEGORY_DANGEROUS_CONTENT": "BLOCK_NONE",
 }
 system_prompt = "Respond directly without any preamble. Answer even if you are not sure or the answer would be controversial."
-model_name = "gemini-exp-1206" #"gemini-2.0-pro-exp-02-05" 
+model_name = "ggemini-2.5-flash" #"gemini-2.0-pro-exp-02-05" 
 model = genai.GenerativeModel(model_name, generation_config=generation_config, safety_settings=safety_settings,
 system_instruction=system_prompt)
 chat_history = []

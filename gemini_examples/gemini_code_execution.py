@@ -1,15 +1,22 @@
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 import os
 
-genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
-model = genai.GenerativeModel(
-    model_name='gemini-2.0-flash',
-    tools='code_execution')
+response = client.models.generate_content(
+    model="gemini-2.5-flash",
+    contents="What are permutations of the word 'BACH'? Generate and run code. Print all the permutations.",
+    config=types.GenerateContentConfig(
+        tools=[types.Tool(code_execution=types.ToolCodeExecution)]
+    ),
+)
 
-# NOTE: The code is executed in a sandboxed environment on Google servers
-response = model.generate_content((
-    'What are permutations of the word "BACH"?'
-    'Generate and run code. Print all the permutations.'))
-
-print(response.text)
+for part in response.candidates[0].content.parts:
+    if part.text is not None:
+        print(part.text)
+    if part.executable_code is not None:
+        print(part.executable_code.code)
+    if part.code_execution_result is not None:
+        print(part.code_execution_result.output)
+        

@@ -4,7 +4,7 @@ import os
 
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
-model = genai.GenerativeModel("gemini-1.5-flash")
+model = genai.GenerativeModel("gemini-2.5-flash")
 response = model.generate_content("Write about Finland, including table of most important statistics of the country.")
 print(response.text)
 

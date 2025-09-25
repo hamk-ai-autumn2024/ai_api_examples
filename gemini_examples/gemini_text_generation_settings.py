@@ -21,7 +21,7 @@ safety_settings = {
 }
 system_prompt = "Respond directly without any small talk or preambles."
 
-model = genai.GenerativeModel('gemini-2.5-flash-preview-04-17', 
+model = genai.GenerativeModel('gemini-2.5-flash', 
                               reasoning_effort="low", # "low", "medium", "high", "none"
                                generation_config=generation_config,
                               safety_settings=safety_settings, system_instruction=system_prompt)
