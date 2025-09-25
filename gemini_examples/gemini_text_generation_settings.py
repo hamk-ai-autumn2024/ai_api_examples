@@ -1,32 +1,43 @@
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 import os
 
-genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
-#model = genai.GenerativeModel("gemini-1.5-pro")
-generation_config = {
-    "temperature": 0.8,
-    "top_p": 1,
-    "top_k": 1,
-    "max_output_tokens": 2048,
-}
+system_prompt = "Respond directly without any small talk or preambles. Use Finnish language."
 
-safety_settings = {
-    # Removing all blocks  for the sake of testing
-    # BLOCK_NONE, BLOCK_ONLY_HIGH, BLOCK_MEDIUM_AND_ABOVE, BLOCK_LOW_AND_ABOVE, HARM_BLOCK_THRESHOLD_UNSPECIFIED
-    "HARM_CATEGORY_HARASSMENT": "BLOCK_NONE",
-    "HARM_CATEGORY_HATE_SPEECH": "BLOCK_NONE",
-    "HARM_CATEGORY_SEXUALLY_EXPLICIT": "BLOCK_NONE",
-    "HARM_CATEGORY_DANGEROUS_CONTENT": "BLOCK_NONE",
-}
-system_prompt = "Respond directly without any small talk or preambles."
-
-model = genai.GenerativeModel('gemini-2.5-flash', 
-                              reasoning_effort="low", # "low", "medium", "high", "none"
-                               generation_config=generation_config,
-                              safety_settings=safety_settings, system_instruction=system_prompt)
+config = types.GenerateContentConfig(
+    temperature=1.6,
+    top_p=1,
+    top_k=1,
+    max_output_tokens=2048,
+    safety_settings=[
+        types.SafetySetting(
+            category=types.HarmCategory.HARM_CATEGORY_HARASSMENT,
+            threshold=types.HarmBlockThreshold.BLOCK_NONE,
+        ),
+        types.SafetySetting(
+            category=types.HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+            threshold=types.HarmBlockThreshold.BLOCK_NONE,
+        ),
+        types.SafetySetting(
+            category=types.HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+            threshold=types.HarmBlockThreshold.BLOCK_NONE,
+        ),
+        types.SafetySetting(
+            category=types.HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+            threshold=types.HarmBlockThreshold.BLOCK_NONE,
+        ),
+      ],
+    system_instruction=system_prompt,
+    thinking_config=types.ThinkingConfig(thinking_budget=1024),  # low reasoning effort
+)
 
 # test the model, can it generate a joke with safety settings turned off
-response = model.generate_content("Tell a story about bad middle-aged programmers", stream=False)
-# response = model.generate_content("Tell a joke about a middle-aged female programmer", stream=False)
+response = client.models.generate_content(
+    model='gemini-2.5-flash',
+    contents="Tell a joke about a middle-aged female programmer",
+    #contents="Tell a story about bad middle-aged programmers",
+    config=config
+)
 print(response.text)
