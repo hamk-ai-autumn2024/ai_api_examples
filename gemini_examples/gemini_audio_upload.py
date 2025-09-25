@@ -1,14 +1,17 @@
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 import os
 
-genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 print("Uploading file...")
-input_file = genai.upload_file("petri_speech_sample.wav", display_name="Sample Audio")
 
-print(f"Uploaded file '{input_file.display_name}' as: {input_file.uri}")
+myfile = client.files.upload(file='petri_speech_sample.wav')
+prompt = 'Generate a transcript of the speech. Then translate into Finnish.' 
 print("Analyzing...")
-model = genai.GenerativeModel(model_name="gemini-2.5-flash")
-# Prompt the model with text and the previously uploaded image.
-response = model.generate_content([input_file, "Transcribe the audio file. Then translate into Finnish"])
+
+response = client.models.generate_content(
+  model='gemini-2.5-flash',
+  contents=[prompt, myfile]
+)
 
 print(response.text)

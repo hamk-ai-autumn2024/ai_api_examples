@@ -1,13 +1,21 @@
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 import os
 
-genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 print("Uploading file...")
-input_file = genai.upload_file("malta.jpg")
+with open('malta.jpg', 'rb') as f:
+   image_bytes = f.read()
+   print("Analyzing...")
+   response = client.models.generate_content(
+      model='gemini-2.5-flash',
+      contents=[
+         types.Part.from_bytes(
+            data=image_bytes,
+            mime_type='image/jpeg',
+            ),
+            'Desribe the image in detail. Read the texts in the image.'
+            ]
+        )
 
-print(f"Uploaded file '{input_file.display_name}' as: {input_file.uri}")
-print("Analyzing...")
-model = genai.GenerativeModel(model_name="gemini-2.5-flash")
-# Prompt the model with text and the previously uploaded image.
-response = model.generate_content([input_file, "Desribe the image in detail. Read the texts in the image."])
 print(response.text)

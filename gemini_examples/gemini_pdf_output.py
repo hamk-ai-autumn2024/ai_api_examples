@@ -1,11 +1,14 @@
-import google.generativeai as genai
+from google import genai
 from markdown_pdf import MarkdownPdf, Section
-import os
+import os 
 
-genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
-model = genai.GenerativeModel("gemini-2.5-flash")
-response = model.generate_content("Write about Finland, including table of most important statistics of the country.")
+prompt = "Write about Finland, including table of most important statistics of the country."
+response = client.models.generate_content(
+    model="gemini-2.5-flash",
+    contents=prompt,
+)
 print(response.text)
 
 pdf = MarkdownPdf(toc_level=1)

@@ -1,14 +1,20 @@
-import google.generativeai as genai
+from google import genai
+from google.genai import types
+import pathlib
 import os
 
-genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-print("Uploading file...")
-input_file = genai.upload_file(path="Robinson_Crusoe_BT.pdf",
-                                display_name="Robinson Crusoe PDF")
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
-print(f"Uploaded file '{input_file.display_name}' as: {input_file.uri}")
-print("Analyzing...")
-model = genai.GenerativeModel(model_name="gemini-2.5-flash")
-# Prompt the model with text and the previously uploaded image.
-response = model.generate_content([input_file, "Summarize the story and list the main characters"])
+# Retrieve and encode the PDF byte
+filepath = pathlib.Path('Robinson_Crusoe_BT.pdf')
+
+prompt = "Summarize the story and list the main characters"
+response = client.models.generate_content(
+  model="gemini-2.5-flash",
+  contents=[
+      types.Part.from_bytes(
+        data=filepath.read_bytes(),
+        mime_type='application/pdf',
+      ),
+      prompt])
 print(response.text)

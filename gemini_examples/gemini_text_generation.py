@@ -1,8 +1,9 @@
-import google.generativeai as genai
-import os
+from google import genai
+import os 
 
-genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-
-model = genai.GenerativeModel("gemini-2.5-flash")
-response = model.generate_content("Write a story about a very unlucky man who wins the lottery.")
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+response = client.models.generate_content(
+    model="gemini-2.5-flash",
+    contents="How does AI work? Give a concise answer with few examples and sentences.",
+)
 print(response.text)
