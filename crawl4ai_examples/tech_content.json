@@ -2,10 +2,21 @@
   {
     "index": 0,
     "tags": [
+      "technology deals"
+    ],
+    "content": [
+      "## [The best Apple deals before Prime Big Deal Days ](https://www.nbcnews.com/select/shopping/early-apple-deals-october-prime-day-2025-rcna234749)"
+    ],
+    "error": false
+  },
+  {
+    "index": 0,
+    "tags": [
       "technology"
     ],
     "content": [
-      "Warren Buffett to step down as CEO of Berkshire Hathaway"
+      "Character.AI removes Disney characters from platform after studio issues warning",
+      "Princess Elsa from \"Frozen\" and \"Star Wars\" villain Darth Vader were among the Disney characters the chatbot impersonated."
     ],
     "error": false
   },
@@ -15,7 +26,8 @@
       "technology"
     ],
     "content": [
-      "Trump on his call to Bezos: \u2018I\\'ll always call people if I disagree with them\u2019"
+      "Senators urge investigation into Tesla's 'Full Self-Driving' after train crossing incidents",
+      "The senators' letter comes after NBC News reviewed dozens of driver complaints alleging Tesla\u2019s software mishandled train crossings."
     ],
     "error": false
   },
@@ -25,7 +37,9 @@
       "technology"
     ],
     "content": [
-      "Warren Buffett slams Trump\u2019s tariffs as he announces retirement"
+      "Artificial intelligence",
+      "Tilly Norwood, fully AI 'actor,' blasted by actors union for 'devaluing human artistry'",
+      "The AI creation has prompted backlash among Hollywood actors, including Whoopi Goldberg and Emily Blunt."
     ],
     "error": false
   },
@@ -35,7 +49,31 @@
       "technology"
     ],
     "content": [
-      "China says US officials reached out wanting to start trade talks"
+      "Elon Musk",
+      "Senators urge investigation into Tesla's 'Full Self-Driving' after train crossing incidents",
+      "The senators' letter comes after NBC News reviewed dozens of driver complaints alleging Tesla\u2019s software mishandled train crossings."
+    ],
+    "error": false
+  },
+  {
+    "index": 4,
+    "tags": [
+      "technology"
+    ],
+    "content": [
+      "YouTube to pay $24 million to settle Trump lawsuit",
+      "A notice of settlement details that $22 million will go toward building a new White House ballroom."
+    ],
+    "error": false
+  },
+  {
+    "index": 5,
+    "tags": [
+      "technology"
+    ],
+    "content": [
+      "Electronic Arts to be acquired for $52.5 billion",
+      "The deal would be the largest-ever buyout funded by private-equity firms, including Affinity Partners and Saudi Arabia's sovereign wealth fund."
     ],
     "error": false
   }

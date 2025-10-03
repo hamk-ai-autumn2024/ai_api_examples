@@ -1,28 +1,50 @@
-import os
-import json
+"""Crawl4AI 0.6.2+ example: extract tech content with an OpenAI LLM."""
+
 import asyncio
-from crawl4ai import AsyncWebCrawler
+import json
+from pathlib import Path
+from typing import Any, List, Union
+
+from crawl4ai import AsyncWebCrawler, CacheMode, CrawlerRunConfig, LLMConfig
 from crawl4ai.extraction_strategy import LLMExtractionStrategy
 
-# This example no longer works with latest crawl4ai version
+TECH_URL = "https://www.nbcnews.com/business"
+OUTPUT_PATH = Path("tech_content.json")
 
-# Assuming that OPENAI_API_KEY is set in the environment variables
-async def extract_tech_content():
-    async with AsyncWebCrawler(verbose=True) as crawler:
-        result = await crawler.arun(
-            url="https://www.nbcnews.com/business",
-            extraction_strategy=LLMExtractionStrategy(
-                llm_provider="openai",
-                model="gpt-4o-mini",
-                instruction="Extract only content related to technology"
-            ),
-            bypass_cache=True,
-        )
 
-    tech_content = json.loads(result.extracted_content)
+async def extract_tech_content() -> None:
+    llm_config = LLMConfig(provider="openai/gpt-4o-mini")
+    extraction_strategy = LLMExtractionStrategy(
+        llm_config=llm_config,
+        instruction="Extract only content related to technology",
+        force_json_response=True,
+        verbose=True,
+    )
+
+    run_config = CrawlerRunConfig(
+        extraction_strategy=extraction_strategy,
+        cache_mode=CacheMode.BYPASS,
+        verbose=True,
+    )
+
+    async with AsyncWebCrawler() as crawler:
+        result = await crawler.arun(url=TECH_URL, config=run_config)
+
+    if not result.success:
+        raise RuntimeError(f"Crawl failed: {result.error_message}")
+
+    raw_content: Union[str, List[Any], None] = result.extracted_content
+    if isinstance(raw_content, str):
+        tech_content = json.loads(raw_content)
+    elif raw_content is None:
+        tech_content = []
+    else:
+        tech_content = raw_content
+
     print(f"Number of tech-related items extracted: {len(tech_content)}")
 
-    with open("tech_content.json", "w", encoding="utf-8") as f:
-        json.dump(tech_content, f, indent=2)
+    OUTPUT_PATH.write_text(json.dumps(tech_content, indent=2), encoding="utf-8")
 
-asyncio.run(extract_tech_content())
+
+if __name__ == "__main__":
+    asyncio.run(extract_tech_content())
