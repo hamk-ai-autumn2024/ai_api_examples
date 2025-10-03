@@ -1,4 +1,4 @@
-"""Minimal FAISS-backed RAG demo using the latest OpenAI Python SDK."""
+"""FAISS-based RAG example using the latest OpenAI Python SDK."""
 
 from __future__ import annotations
 
@@ -9,11 +9,6 @@ from typing import Iterable, List, Sequence, Tuple
 import faiss
 import numpy as np
 from openai import OpenAI
-
-CLIENT = OpenAI()  # Reads the API key from the OPENAI_API_KEY environment variable.
-EMBEDDING_MODEL = "text-embedding-3-small"
-RESPONSE_MODEL = "gpt-5-nano"
-DB_PATH = Path("rag_data.db")
 
 SAMPLE_DOCUMENTS = (
     "FAISS is a vector search library for efficient similarity search.",
@@ -27,12 +22,19 @@ SAMPLE_DOCUMENTS = (
     "FAISS can handle large-scale datasets efficiently.",
     "FAISS is developed by Facebook AI Research (FAIR).",
     "RAG stands for Retrieval-Augmented Generation.",
-    "Limits of RAG include potential inaccuracies in retrieved documents and reliance on the quality of the underlying data."
+    "Limits of RAG include potential inaccuracies in retrieved documents and reliance on the quality of the underlying data.",
+    "Easter eggs are hidden features or messages in software, games, or media.",
+    "Easter egg for FAISS: The name 'FAISS' is pronounced like 'face' and stands for Facebook AI Similarity Search.",
 )
+
+CLIENT = OpenAI()  # Reads credentials from OPENAI_API_KEY.
+EMBEDDING_MODEL = "text-embedding-3-small"
+RESPONSE_MODEL = "gpt-5-nano"
+DB_PATH = Path("rag_data2.db")
 
 
 def ensure_documents(conn: sqlite3.Connection, documents: Iterable[str]) -> None:
-    """Seed the sqlite database with example documents, replacing any existing rows."""
+    """Create the documents table (if needed), reset its contents, and seed sample rows."""
     with conn:
         conn.execute(
             """
@@ -74,10 +76,10 @@ def rag_query(
     index: faiss.IndexFlatL2,
     doc_ids: Sequence[int],
     conn: sqlite3.Connection,
-    top_k: int = 2,
+    top_k: int = 3,
 ) -> Tuple[str, List[str]]:
     query_embedding = np.array(get_embedding(query), dtype="float32").reshape(1, -1)
-    distances, positions = index.search(query_embedding, top_k)
+    _, positions = index.search(query_embedding, top_k)
 
     retrieved_docs: List[str] = []
     for pos in positions[0]:
@@ -105,16 +107,14 @@ def rag_query(
                 ),
             },
         ],
-        temperature=0.7,
-        max_output_tokens=300,
+        #temperature=0.3,
+        max_output_tokens=400,
     )
 
     return response.output_text.strip(), retrieved_docs
 
 
 def main() -> None:
-    print("Sample question: What is FAISS?")
-
     with sqlite3.connect(DB_PATH) as conn:
         ensure_documents(conn, SAMPLE_DOCUMENTS)
         rows = fetch_documents(conn)
@@ -125,18 +125,18 @@ def main() -> None:
         doc_ids, contents = zip(*rows)
         embeddings = np.array([get_embedding(text) for text in contents], dtype="float32")
         index = build_faiss_index(embeddings)
-
+        print("Example query: What is FAISS?")
         while True:
-            query_text = input("Enter your question (leave blank to exit): ").strip()
+            query_text = input("Enter your question (press Enter to exit): ").strip()
             if not query_text:
                 break
 
             answer, sources = rag_query(query_text, index, doc_ids, conn)
 
             print("Answer:", answer)
-            print("\nSources:")
+            print("Sources:")
             for i, src in enumerate(sources, start=1):
-                print(f"{i}. {src}")
+                print(f"  {i}. {src}")
             print()
 
     print("Goodbye!")
