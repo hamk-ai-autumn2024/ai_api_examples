@@ -17,7 +17,7 @@ async def call_claude(query: str):
     msg = cl.Message(content="", author="Claude")
 
     stream = await c.messages.create(
-        model="claude-sonnet-latest",
+        model="claude-sonnet-4-5-20250929",
         messages=messages,
         max_tokens=1000,
         stream=True,
