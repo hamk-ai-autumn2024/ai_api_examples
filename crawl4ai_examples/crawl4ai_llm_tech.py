@@ -16,7 +16,7 @@ async def extract_tech_content() -> None:
     llm_config = LLMConfig(provider="openai/gpt-4o-mini")
     extraction_strategy = LLMExtractionStrategy(
         llm_config=llm_config,
-        instruction="Extract only content related to technology",
+        instruction="Extract only content related to technology.\nReturn an array of JSON objects with keys 'title' and 'url'.",
         force_json_response=True,
         verbose=True,
     )
@@ -42,7 +42,11 @@ async def extract_tech_content() -> None:
         tech_content = raw_content
 
     print(f"Number of tech-related items extracted: {len(tech_content)}")
-
+    for item in tech_content:
+        #print(item)
+        if "content" in item:
+            print(item["content"][0])
+            
     OUTPUT_PATH.write_text(json.dumps(tech_content, indent=2), encoding="utf-8")
 
 
