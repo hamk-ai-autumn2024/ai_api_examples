@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1000" height="480" viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" style="background-color:#f8f9fa; font-family: 'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', sans-serif;">
+  <title>Top 10 Pokémon of All Time - Hand Drawn</title>
+  <desc>A hand-drawn style SVG illustration of 10 iconic Pokémon: Pikachu, Charizard, Mewtwo, Eevee, Gengar, Snorlax, Gyarados, Lucario, Bulbasaur, and Gardevoir.</desc>
+
+  <defs>
+    <!-- This filter creates the "hand-drawn" effect -->
+    <filter id="handDrawnFilter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </defs>
+
+  <!-- Apply the filter to a group containing all drawings -->
+  <g filter="url(#handDrawnFilter)">
+
+    <!-- 1. Pikachu -->
+    <g transform="translate(50, 20)">
+      <path fill="#2c2c2c" d="M 50 15 C 20 15 10 40 10 65 C 10 90 20 115 50 115 C 80 115 90 90 90 65 C 90 40 80 15 50 15 Z" />
+      <path fill="#FFDE00" d="M 50 18 C 23 18 13 42 13 65 C 13 88 23 112 50 112 C 77 112 87 88 87 65 C 87 42 77 18 50 18 Z" />
+      <!-- Ears -->
+      <path fill="#2c2c2c" d="M 25 10 L 15 25 L 30 30 Z M 75 10 L 85 25 L 70 30 Z" />
+      <path fill="#FFDE00" d="M 27 13 L 18 25 L 30 28 Z M 73 13 L 82 25 L 70 28 Z" />
+      <!-- Eyes & Mouth -->
+      <circle cx="38" cy="55" r="4" fill="#2c2c2c"/>
+      <circle cx="62" cy="55" r="4" fill="#2c2c2c"/>
+      <path d="M 45 70 Q 50 75 55 70" stroke="#2c2c2c" fill="none" stroke-width="2" stroke-linecap="round"/>
+      <!-- Cheeks -->
+      <circle cx="25" cy="70" r="8" fill="#FF3333"/>
+      <circle cx="75" cy="70" r="8" fill="#FF3333"/>
+      <text x="50" y="145" text-anchor="middle" font-size="16" fill="#2c2c2c">1. Pikachu</text>
+    </g>
+
+    <!-- 2. Charizard -->
+    <g transform="translate(150, 10)">
+      <!-- Body -->
+      <path fill="#E66D39" d="M 70 110 C 60 90, 50 60, 60 40 C 70 20, 90 20, 100 40 C 110 60, 115 90, 100 115 L 70 110 Z"/>
+      <path fill="#FDEEC9" d="M 85 112 C 75 90, 75 60, 85 50 C 90 60, 90 90, 85 112 Z"/>
+      <!-- Head -->
+      <path fill="#E66D39" d="M 95 30 C 110 25, 125 35, 120 50 C 115 65, 100 60, 95 45 Z"/>
+      <!-- Wings -->
+      <path fill="#54A595" d="M 65 50 C 40 30, 20 60, 40 80 Z M 105 50 C 130 30, 150 60, 130 80 Z"/>
+      <!-- Tail Flame -->
+      <path fill="#FFDE00" d="M 65 115 Q 60 130 70 140 Q 80 130 75 115 Z"/>
+      <path fill="#FF3333" d="M 67 118 Q 65 128 70 135 Q 75 128 73 118 Z"/>
+      <text x="85" y="145" text-anchor="middle" font-size="16" fill="#2c2c2c">2. Charizard</text>
+    </g>
+
+    <!-- 3. Mewtwo -->
+    <g transform="translate(280, 15)">
+      <!-- Body -->
+      <path fill="#D0AAD0" d="M 50 110 C 45 80, 45 50, 55 30 C 65 10, 85 10, 90 30 C 95 50, 90 80, 80 110 Z"/>
+      <!-- Head -->
+      <path fill="#D0AAD0" d="M 72 25 C 60 15, 80 5, 88 15 C 95 25, 80 35, 72 25 Z"/>
+      <path fill="#8B5E8B" d="M 75 45 C 70 40, 80 40, 85 45 L 80 55 Z"/>
+      <!-- Tail -->
+      <path d="M 50 100 C 20 120, 20 70, 45 60" stroke="#D0AAD0" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <text x="70" y="145" text-anchor="middle" font-size="16" fill="#2c2c2c">3. Mewtwo</text>
+    </g>
+
+    <!-- 4. Eevee -->
+    <g transform="translate(400, 25)">
+      <!-- Body -->
+      <path fill="#A86837" d="M 40 105 C 30 80, 35 50, 50 45 C 65 40, 80 50, 80 70 C 80 90, 70 105, 60 105 Z"/>
+      <!-- Head -->
+      <path fill="#A86837" d="M 65 60 C 50 50, 60 30, 75 30 C 90 30, 95 50, 85 60 Z"/>
+      <!-- Collar -->
+      <path fill="#FDEEC9" d="M 65 65 C 45 70, 35 90, 45 100 Q 65 110 85 100 C 95 90, 85 70, 65 65 Z"/>
+      <!-- Ears -->
+      <path fill="#4D382C" d="M 55 35 L 45 15 L 65 25 Z M 95 35 L 105 15 L 85 25 Z"/>
+      <text x="70" y="145" text-anchor="middle" font-size="16" fill="#2c2c2c">4. Eevee</text>
+    </g>
+
+    <!-- 5. Gengar -->
+    <g transform="translate(520, 25)">
+      <!-- Body -->
+      <path fill="#6A4795" d="M 20 100 Q 25 70, 40 60 L 50 40 L 60 60 Q 75 70, 80 100 C 60 115, 40 115, 20 100 Z"/>
+      <!-- Eyes -->
+      <path fill="#D12A33" d="M 40 70 C 45 65, 55 65, 60 70 C 55 75, 45 75, 40 70 Z"/>
+      <!-- Smile -->
+      <path d="M 35 90 Q 50 100, 65 90" stroke="#FDFDFD" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <text x="50" y="145" text-anchor="middle" font-size="16" fill="#2c2c2c">5. Gengar</text>
+    </g>
+
+    <!-- 6. Snorlax -->
+    <g transform="translate(50, 230)">
+      <!-- Body -->
+      <path fill="#3A5D67" d="M 15 110 C 10 70, 20 30, 50 30 C 80 30, 90 70, 85 110 C 70 125, 30 125, 15 110 Z"/>
+      <!-- Belly -->
+      <path fill="#FDEEC9" d="M 25 105 C 25 70, 35 50, 50 50 C 65 50, 75 70, 75 105 C 60 115, 40 115, 25 105 Z"/>
+      <!-- Face -->
+      <path d="M 40 70 L 45 75 M 60 70 L 55 75" stroke="#2c2c2c" stroke-width="2" stroke-linecap="round"/>
+      <path d="M 45 90 Q 50 95 55 90" stroke="#2c2c2c" stroke-width="2" fill="none"/>
+      <text x="50" y="145" text-anchor="middle" font-size="16" fill="#2c2c2c">6. Snorlax</text>
+    </g>
+
+    <!-- 7. Gyarados -->
+    <g transform="translate(160, 220)">
+      <!-- Body -->
+      <path d="M 20 100 C 40 60, 80 60, 100 100 C 120 140, 80 140, 60 100 C 40 60, 80 60, 100 100" stroke="#3A7DAE" fill="none" stroke-width="12" stroke-linecap="round"/>
+      <path d="M 25 95 C 40 65, 75 65, 95 95 C 115 135, 85 135, 65 95 C 45 65, 75 65, 95 95" stroke="#FDEEC9" fill="none" stroke-width="6" stroke-linecap="round"/>
+      <!-- Head -->
+      <path fill="#3A7DAE" d="M 10 100 C 5 80, 20 70, 30 80 Z"/>
+      <!-- Crest -->
+      <path fill="#FFFFFF" d="M 10 80 L 0 70 L 15 65 L 5 60 L 20 55 Z"/>
+      <text x="60" y="145" text-anchor="middle" font-size="16" fill="#2c2c2c">7. Gyarados</text>
+    </g>
+
+    <!-- 8. Lucario -->
+    <g transform="translate(300, 225)">
+      <!-- Body -->
+      <path fill="#2D3E50" d="M 50 110 L 40 70 L 50 40 L 60 70 Z"/>
+      <path fill="#FDEEC9" d="M 45 80 L 55 80 L 50 95 Z"/>
+      <!-- Head -->
+      <path fill="#2D3E50" d="M 50 35 C 40 25, 60 25, 50 35 L 45 15 L 55 15 Z"/>
+      <!-- Aura sensors -->
+      <path d="M 35 40 L 25 50 M 65 40 L 75 50" stroke="#2D3E50" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <text x="50" y="145" text-anchor="middle" font-size="16" fill="#2c2c2c">8. Lucario</text>
+    </g>
+
+    <!-- 9. Bulbasaur -->
+    <g transform="translate(400, 235)">
+      <!-- Body -->
+      <path fill="#78C8A8" d="M 20 100 C 10 80, 20 60, 40 60 C 70 60, 80 80, 70 100 Z"/>
+      <!-- Head -->
+      <path fill="#78C8A8" d="M 60 70 C 75 65, 85 75, 80 85 Z"/>
+      <!-- Bulb -->
+      <path fill="#509878" d="M 45 65 C 30 60, 30 40, 45 35 C 60 30, 60 50, 45 65 Z"/>
+      <path fill="#387058" d="M 45 60 C 35 57, 35 45, 45 42 C 55 39, 55 50, 45 60 Z"/>
+      <!-- Eyes -->
+      <circle cx="70" cy="75" r="4" fill="#CF3030"/>
+      <text x="50" y="145" text-anchor="middle" font-size="16" fill="#2c2c2c">9. Bulbasaur</text>
+    </g>
+
+    <!-- 10. Gardevoir -->
+    <g transform="translate(510, 220)">
+      <!-- Body/Dress -->
+      <path fill="#F0F0F0" d="M 50 115 C 20 110, 20 60, 50 50 C 80 60, 80 110, 50 115 Z"/>
+      <!-- Hair/Head -->
+      <path fill="#4CAF50" d="M 50 55 C 35 50, 30 30, 50 25 C 70 30, 65 50, 50 55 Z"/>
+      <!-- Chest Horn -->
+      <path fill="#E53935" d="M 50 70 L 45 85 L 55 85 Z"/>
+      <text x="50" y="145" text-anchor="middle" font-size="16" fill="#2c2c2c">10. Gardevoir</text>
+    </g>
+    
+    <!-- A more complex drawing for fun: A better Charizard -->
+    <g transform="translate(620, 10)">
+        <path fill="#2c2c2c" d="M96 117c-2-1-5-4-7-6-1-1-2-3-2-4 0-2 2-3 4-3 1 0 3 1 4 2 1 1 2 3 2 4s-1 3-1 4zm-1-11c-1-1-3-2-5-2-2 0-4 1-5 2-1 1-2 3-2 5 0 2 1 4 2 5 1 1 3 2 5 2s4-1 5-2c1-1 2-3 2-5s-1-4-2-5zm28-4c1-1 2-3 2-4s-1-3-2-4c-1-1-3-2-4-2-2 0-4 1-5 2-1 1-2 3-2 5 0 2 1 4 2 5 1 1 3 2 5 2s4-1 5-2zm-1-7c0-2-2-3-4-3-1 0-3 1-4 2-1 1-2 3-2 4s1 3 2 4 3 2 4 2 4-1 4-3z"/>
+        <path fill="#F08030" d="M91 107c-2 0-4 1-5 2-1 1-2 3-2 5 0 2 1 4 2 5 1 1 3 2 5 2s4-1 5-2c1-1 2-3 2-5s-1-4-2-5c-1-1-3-2-5-2zm32 0c-2 0-4 1-5 2-1 1-2 3-2 5 0 2 1 4 2 5 1 1 3 2 5 2s4-1 5-2c1-1 2-3 2-5s-1-4-2-5c-1-1-3-2-5-2z"/>
+        <path fill="#2c2c2c" d="M110 120c-1-2-3-3-5-3-2 0-4 1-5 3-1 2-1 4 0 6 1 2 3 3 5 3s4-1 5-3c1-2 1-4 0-6zm-1-2c1-2 1-5 0-7-1-2-3-4-5-4-3 0-5 2-6 4-1 2-1 5 0 7 1 2 3 4 6 4s4-2 5-4z"/>
+        <path fill="#F8D030" d="M105 118c-2 0-4 1-5 3-1 2-1 4 0 6 1 2 3 3 5 3s4-1 5-3c1-2 1-4 0-6-1-2-3-3-5-3z"/>
+        <path fill="#F08030" d="M129 120s-2-2-4-2-3 1-3 1-2-3-5-3-5 3-5 3-2-2-4-2-4 2-4 2l-1 1c-2 3-2 6 0 8l1 1c1 1 2 1 3 1h22c1 0 2 0 3-1l1-1c2-2 2-5 0-8z"/>
+        <path fill="#2c2c2c" d="M129 119c-1-1-3-2-4-2-2 0-3 0-4 2-1 1-1 1-2 1-2 0-3-2-5-2-2 0-4 2-5 2-1 1-1 1-2 1-2 0-3-2-5-2-1 0-2 1-3 1l-1 1c-2 3-2 6 0 8l1 1c1 1 2 1 3 1h22c1 0 2 0 3-1l1-1c2-2 2-5 0-8l-1-1z"/>
+        <path fill="#F08030" d="M110 32c-1-2-1-10 0-12s-1-10 2-12c2-2 10-2 12 0 2 2 4 10 2 12s-1 10 0 12-8 4-16 2z"/>
+        <path fill="#F8D030" d="M111 31c0-2-1-9 0-11s0-9 2-11c1-1 8-2 10 0 2 2 3 9 2 11s-1 9 0 11-8 3-14 1z"/>
+        <path fill="#DE5018" d="M112 30c0-2 0-8 0-10s0-8 2-10c1-1 7-1 9 0 1 2 2 8 2 10s-1 8 0 10-7 2-13 0z"/>
+        <path fill="#2c2c2c" d="M129 82c-2-3-5-5-8-5-3 0-6 2-8 5-2 3-4 6-4 10 0 4 1 8 4 11 2 3 5 5 8 5s6-2 8-5c2-3 4-7 4-11s-2-7-4-10zm-16-2c3-4 7-6 11-6s8 2 11 6c3 4 4 8 4 13s-1 9-4 13c-3 4-7 6-11 6s-8-2-11-6c-3-4-4-9-4-13s1-9 4-13z"/>
+        <path fill="#F08030" d="M113 80c3-4 7-6 11-6s8 2 11 6c3 4 4 8 4 13s-1 9-4 13c-3 4-7 6-11 6s-8-2-11-6c-3-4-4-9-4-13s1-9 4-13z"/>
+        <path fill="#F8D030" d="M115 106c2-2 5-4 8-4s6 2 8 4c2 2 4 5 4 8s-2 6-4 8-5 4-8 4-6-2-8-4-4-5-4-8 2-6 4-8z"/>
+        <path fill="#2c2c2c" d="M124 75c-1 0-2-1-2-2 0-1 1-2 2-2s2 1 2 2-1 2-2 2zm-12 0c-1 0-2-1-2-2 0-1 1-2 2-2s2 1 2 2-1 2-2 2z"/>
+        <path fill="#2c2c2c" d="M152 70c-2-1-4-1-6-1-2 0-4 0-6 1-4 2-8 5-11 9-3 4-5 9-5 14 0 5 2 10 5 14 3 4 7 7 11 9 2 1 4 1 6 1s4 0 6-1c4-2 8-5 11-9 3-4 5-9 5-14 0-5-2-10-5-14-3-4-7-7-11-9zm-2 2c3 2 6 5 9 8 2 3 4 7 4 12s-2 9-4 12c-3 3-6 6-9 8-2 1-4 2-6 2s-4-1-6-2c-3-2-6-5-9-8-2-3-4-7-4-12s2-9 4-12c3-3 6-6 9-8 2-1 4-2 6-2s4 1 6 2z"/>
+        <path fill="#98D8D8" d="M150 72c3 2 6 5 9 8 2 3 4 7 4 12s-2 9-4 12c-3 3-6 6-9 8-2 1-4 2-6 2s-4-1-6-2c-3-2-6-5-9-8-2-3-4-7-4-12s2-9 4-12c3-3 6-6 9-8 2-1 4-2 6-2s4 1 6 2z"/>
+        <path fill="#2c2c2c" d="M141 106c-2-2-5-4-8-4-3 0-6 2-8 4-2 2-4 5-4 8s2 6 4 8c2 2 5 4 8 4s6-2 8-4c2-2 4-5 4-8s-2-6-4-8zm8-2c2 3 3 6 3 10s-1 7-3 10c-2 3-5 5-8 5s-6-2-8-5c-2-3-3-6-3-10s1-7 3-10c2-3 5-5 8-5s6 2 8 5z"/>
+        <path fill="#F08030" d="M133 104c2-3 5-5 8-5s6 2 8 5c2 3 3 6 3 10s-1 7-3 10c-2 3-5 5-8 5s-6-2-8-5c-2-3-3-6-3-10s1-7 3-10z"/>
+        <path fill="#F8D030" d="M135 120c1-2 3-3 5-3s4 1 5 3c1 2 1 4 0 6s-3 3-5 3-4-1-5-3-1-4 0-6z"/>
+        <path fill="#2c2c2c" d="M140 119c-1-2-1-5 0-7s3-4 5-4 5 2 6 4 1 5 0 7-3 4-6 4-4-2-5-4z"/>
+        <path fill="#2c2c2c" d="M141 69c-3 0-5-1-7-3-2-2-3-5-3-7 0-3 1-5 3-7s5-3 7-3h1c3 0 5 1 7 3s3 5 3 7-1 5-3 7-5 3-7 3h-1zm0-2c2 0 4-1 5-2s2-3 2-5-1-4-2-5-3-2-5-2h-1c-2 0-4 1-5 2s-2 3-2 5 1 4 2 5 3 2 5 2h1z"/>
+        <path fill="#F08030" d="M141 67c2 0 4-1 5-2s2-3 2-5-1-4-2-5-3-2-5-2h-1c-2 0-4 1-5 2s-2 3-2 5 1 4 2 5 3 2 5 2h1z"/>
+        <path fill="#2c2c2c" d="M159 69c-3 0-5-1-7-3-2-2-3-5-3-7 0-3 1-5 3-7s5-3 7-3h1c3 0 5 1 7 3s3 5 3 7-1 5-3 7-5 3-7 3h-1zm0-2c2 0 4-1 5-2s2-3 2-5-1-4-2-5-3-2-5-2h-1c-2 0-4 1-5 2s-2 3-2 5 1 4 2 5 3 2 5 2h1z"/>
+        <path fill="#F08030" d="M159 67c2 0 4-1 5-2s2-3 2-5-1-4-2-5-3-2-5-2h-1c-2 0-4 1-5 2s-2 3-2 5 1 4 2 5 3 2 5 2h1z"/>
+        <path fill="#2c2c2c" d="M129 120c-2 0-4 1-5 2-1 1-2 3-2 5 0 2 1 4 2 5s3 2 5 2 4-1 5-2 2-3 2-5-1-4-2-5-3-2-5-2z"/>
+        <path fill="#F08030" d="M124 122c-1 1-2 3-2 5 0 2 1 4 2 5s3 2 5 2 4-1 5-2 2-3 2-5-1-4-2-5-3-2-5-2-4 1-5 2z"/>
+        <text x="130" y="145" text-anchor="middle" font-size="16" fill="#2c2c2c">Also Charizard</text>
+    </g>
+
+  </g>
+</svg>
