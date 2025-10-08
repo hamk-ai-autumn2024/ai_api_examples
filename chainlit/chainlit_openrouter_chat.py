@@ -39,6 +39,7 @@ async def start():
                 "qwen/qwen3-30b-a3b:free",
                 "moonshotai/kimi-k2:free",
                 "google/gemini-2.0-flash-exp:free",
+                "z-ai/glm-4.5-air:free"
             ],
             initial_index=6,
             description="Choose the model to use"

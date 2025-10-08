@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClearView Roof Cleaning - Professional Roof Restoration Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a5f7a 0%, #2a9d8f 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo svg {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        nav ul li a:hover {
+            opacity: 0.8;
+        }
+
+        .hero {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23e3f2fd" width="1200" height="600"/><path fill="%232a9d8f" opacity="0.3" d="M0 300L50 325L100 300L150 275L200 300L250 325L300 300L350 275L400 300L450 325L500 300L550 275L600 300L650 325L700 300L750 275L800 300L850 325L900 300L950 275L1000 300L1050 325L1100 300L1150 275L1200 300V600H0V300Z"/></svg>') no-repeat center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #1a5f7a;
+            margin-top: 60px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #2a9d8f;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #21867a;
+        }
+
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #1a5f7a;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card svg {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1rem;
+            fill: #2a9d8f;
+        }
+
+        .testimonials {
+            background: #f5f5f5;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #2a9d8f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        .stars {
+            color: #ffd700;
+            margin-top: 0.5rem;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            height: 200px;
+            background: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .before-after {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .before-after .before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            overflow: hidden;
+        }
+
+        .contact {
+            background: #1a5f7a;
+            color: white;
+            text-align: center;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        footer {
+            background: #0d3b4e;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+            }
+
+            nav ul li {
+                margin: 0 0.5rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" rx="15" fill="white"/>
+                    <path d="M20 70 L50 30 L80 70 Z" fill="#2a9d8f"/>
+                    <circle cx="50" cy="50" r="5" fill="#1a5f7a"/>
+                    <path d="M35 70 L35 80 M50 70 L50 85 M65 70 L65 80" stroke="#1a5f7a" stroke-width="3"/>
+                </svg>
+                ClearView Roof Cleaning
+            </div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>ClearView Roof Cleaning</h1>
+            <p>"Bringing Your Roof Back to Life"</p>
+            <a href="#contact" class="btn">Get Free Quote</a>
+        </div>
+    </section>
+
+    <section id="services" class="section">
+        <h2>Our Services</h2>
+        <div class="services">
+            <div class="service-card">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+                <h3>Soft Wash Cleaning</h3>
+                <p>Safe, low-pressure washing that removes algae, moss, and stains without damaging your shingles.</p>
+            </div>
+            <div class="service-card">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                <h3>Moss & Algae Removal</h3>
+                <p>Eliminate harmful growths that can damage your roof and reduce its lifespan.</p>
+            </div>
+            <div class="service-card">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 6L9 17l-5-5"/>
+                </svg>
+                <h3>Preventative Treatment</h3>
+                <p>Apply protective treatments to prevent future growth and extend your roof's life.</p>
+            </div>
+            <div class="service-card">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="9" y1="9" x2="15" y2="9"/>
+                    <line x1="9" y1="13" x2="15" y2="13"/>
+                </svg>
+                <h3>Gutter Cleaning</h3>
+                <p>Complete gutter cleaning and inspection to ensure proper drainage.</p>
+            </div>
+            <div class="service-card">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                </svg>
+                <h3>Pressure Washing</h3>
+                <p>Professional pressure washing for driveways, sidewalks, and exterior walls.</p>
+            </div>
+            <div class="service-card">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v6l4 2"/>
+                </svg>
+                <h3>Roof Inspection</h3>
+                <p>Thorough inspection to identify potential issues before they become costly problems.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="section testimonials">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="avatar">JD</div>
+                    <div>
+                        <h4>John Davis</h4>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+                <p>"ClearView transformed our roof completely! It looks brand new again. The team was professional, on-time, and very careful around our property. Highly recommend!"</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="avatar">SM</div>
+                    <div>
+                        <h4>Sarah Mitchell</h4>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+                <p>"I couldn't believe the difference after ClearView cleaned our roof. The moss and stains are completely gone, and they even cleaned up our gutters. Worth every penny!"</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="avatar">RT</div>
+                    <div>
+                        <h4>Robert Thompson</h4>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+                <p>"Excellent service from start to finish. They explained everything clearly, gave us a fair quote, and did an amazing job. Our neighbors keep asking who cleaned our roof!"</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="section">
+        <h2>Our Work</h2>
+        <div class="gallery">
+            <div class="gallery-item before-after">
+                <div class="before">
+                    <svg viewBox="0 0 250 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="250" height="200" fill="#8B7355"/>
+                        <path d="M0 100 L50 80 L100 100 L150 80 L200 100 L250 80 L250 200 L0 200" fill="#654321"/>
+                        <circle cx="50" cy="50" r="15" fill="#228B22"/>
+                        <circle cx="150" cy="60" r="20" fill="#228B22"/>
+                        <circle cx="200" cy="40" r="12" fill="#228B22"/>
+                    </svg>
+                </div>
+                <svg viewBox="0 0 250 200" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="250" height="200" fill="#D3D3D3"/>
+                    <path d="M0 100 L50 80 L100 100 L150 80 L200 100 L250 80 L250 200 L0 200" fill="#A9A9A9"/>
+                </svg>
+            </div>
+            <div class="gallery-item">
+                <svg viewBox="0 0 250 200" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="250" height="200" fill="#D3D3D3"/>
+                    <path d="M0 100 L50 80 L100 100 L150 80 L200 100 L250 80 L250 200 L0 200" fill="#A9A9A9"/>
+                    <text x="125" y="100" text-anchor="middle" fill="#666" font-size="16">Clean Roof</text>
+                </svg>
+            </div>
+            <div class="gallery-item">
+                <svg viewBox="0 0 250 200" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="250" height="200" fill="#87CEEB"/>
+                    <path d="M0 100 L50 80 L100 100 L150 80 L200 100 L250 80 L250 200 L0 200" fill="#4682B4"/>
+                    <text x="125" y="100" text-anchor="middle" fill="white" font-size="16">After Cleaning</text>
+                </svg>
+            </div>
+            <div class="gallery-item">
+                <svg viewBox="0 0 250 200" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="250" height="200" fill="#F5DEB3"/>
+                    <path d="M0 100 L50 80 L100 100 L150 80 L200 100 L250 80 L250 200 L0 200" fill="#DEB887"/>
+                    <text x="125" y="100" text-anchor="middle" fill="#666" font-size="16">Tile Roof</text>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section contact">
+        <h2>Get Your Free Quote</h2>
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">
+                              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Property Address</label>
+                <input type="text" id="address" name="address" placeholder="123 Main St, City, State ZIP" required>
+            </div>
+            <div class="form-group">
+                <label for="service">Service Needed</label>
+                <select id="service" name="service" style="width:100%;padding:0.8rem;border:none;border-radius:5px;font-size:1rem">
+                    <option>Soft Wash Cleaning</option>
+                    <option>Moss & Algae Removal</option>
+                    <option>Preventative Treatment</option>
+                    <option>Gutter Cleaning</option>
+                    <option>Complete Roof Package</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message">Additional Details</label>
+                <textarea id="message" name="message" placeholder="Tell us about your roof or ask any questions..."></textarea>
+            </div>
+            <button type="submit" class="btn" style="background:#2a9d8f;color:white;border:none;font-size:1rem;cursor:pointer">Request Quote</button>
+        </form>
+        <p style="margin-top:2rem;font-size:1.1rem">Or call us at <strong>(555) 123-4567</strong></p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 ClearView Roof Cleaning. All rights reserved.</p>
+        <p>Fully insured • Locally owned • Satisfaction guaranteed</p>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Form submission handler
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('Thank you! We will contact you within 24 hours with your free quote.');
+            event.target.reset();
+        }
+
+        // Simple before/after toggle on gallery items
+        document.querySelectorAll('.before-after').forEach(item => {
+            let showingBefore = true;
+            item.addEventListener('click', () => {
+                const before = item.querySelector('.before');
+                if (showingBefore) {
+                    before.style.width = '100%';
+                } else {
+                    before.style.width = '50%';
+                }
+                showingBefore = !showingBefore;
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.background = '#0d3b4e';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #1a5f7a 0%, #2a9d8f 100%)';
+            }
+        });
+    </script>
+</body>
+</html>

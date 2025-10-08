@@ -153,6 +153,9 @@
         // Particle system for effects
         let particles = [];
 
+        // Audio context for sound effects
+        let audioContext;
+
         // DOM elements
         const scoreElement = document.getElementById('score');
         const highScoreElement = document.getElementById('high-score');
@@ -164,6 +167,9 @@
             canvas = document.getElementById('game-canvas');
             ctx = canvas.getContext('2d');
             
+            // Initialize audio context
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            
             // Set high score display
             highScoreElement.textContent = highScore;
             
@@ -172,6 +178,46 @@
             
             // Set up keyboard controls
             document.addEventListener('keydown', handleKeyPress);
+        }
+
+        // Play eating food sound
+        function playEatSound() {
+            if (!audioContext) return;
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.type = 'sine';
+            oscillator.frequency.value = 523.25; // C5 note
+            gainNode.gain.value = 0.3;
+            
+            oscillator.start();
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.3);
+            oscillator.stop(audioContext.currentTime + 0.3);
+        }
+
+        // Play collision sound
+        function playCollisionSound() {
+            if (!audioContext) return;
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.type = 'square';
+            oscillator.frequency.value = 100; // Low frequency for collision
+            gainNode.gain.value = 0.3;
+            
+            oscillator.start();
+            // Create a frequency sweep effect
+            oscillator.frequency.exponentialRampToValueAtTime(50, audioContext.currentTime + 0.5);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
+            oscillator.stop(audioContext.currentTime + 0.5);
         }
 
         // Start a new game
