@@ -4,5 +4,6 @@ from langchain_community.utilities import GoogleSerperAPIWrapper
 # Note that SERPER_API_KEY must be the serper dev api key https://serper.dev/api-key
 
 search = GoogleSerperAPIWrapper()
-results = search.run("Who invented Python programming language?")
+results = search.run("Minkälaisen sopimuksen NHL:ssä Kirill Kaprizov solmi Minnesota Wildin kanssa?")
+#results = search.run("Who invented Python programming language?")
 print(results)

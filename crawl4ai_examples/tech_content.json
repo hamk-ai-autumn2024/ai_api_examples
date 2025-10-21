@@ -1,41 +1,26 @@
 [
   {
+    "error": false
+  },
+  {
     "index": 0,
     "tags": [
       "technology"
     ],
     "content": [
-      "[Treasury touts \\'first drafts\\' of Trump dollar coin planned for next year](https://www.nbcnews.com/business/economy/trump-coin-design-draft-rcna235467)"
-    ],
-    "error": false
-  },
-  {
-    "index": 1,
-    "tags": [
-      "technology"
-    ],
-    "content": [
-      "[Character.AI removes Disney characters from platform after studio issues warning](https://www.nbcnews.com/business/business-news/characterai-removes-disney-characters-from-platform-after-request-rcna234827)"
-    ],
-    "error": false
-  },
-  {
-    "index": 2,
-    "tags": [
-      "technology"
-    ],
-    "content": [
-      "[Senators urge investigation into Tesla\\'s \\'Full Self-Driving\\' after train crossing incidents](https://www.nbcnews.com/tech/elon-musk/tesla-fsd-full-self-driving-accident-safety-rcna234514)"
-    ],
-    "error": false
-  },
-  {
-    "index": 3,
-    "tags": [
-      "technology"
-    ],
-    "content": [
-      "[Video game maker Electronic Arts to be acquired for $52.5 billion](https://www.nbcnews.com/business/business-news/electronic-arts-acquired-largest-ever-private-equity-buyout-rcna234432)"
+      "[![The Internal Revenue Service Building in Washington.](https://media-cldnry.s-nbcnews.com/image/upload/t_focal-762x508,f_auto,q_auto:best/rockcms/2023-07/230724-irs-mn-1245-7cdf2f.jpg)Graeme Sloan / Sipa USA via AP file](https://www.nbcnews.com/business/taxes/irs-furloughs-thousands-employees-shutdown-rcna236503)",
+      "[GOVERNMENT SHUTDOWN](https://www.nbcnews.com/politics/government-shutdown)",
+      "## [IRS to furlough nearly half its workforce as shutdown drags on](https://www.nbcnews.com/business/taxes/irs-furloughs-thousands-employees-shutdown-rcna236503)",
+      "* [![Traders on the floor of the NYSE](https://media-cldnry.s-nbcnews.com/image/upload/t_focal-80x80,f_auto,q_auto:best/rockcms/2025-10/251007-nyse-se-540p-989500.jpg)Spencer Platt / Getty Images file](https://www.nbcnews.com/business/markets/stock-market-records-shutdown-inflation-ai-rcna236244)",
+      "### [The stock market has thrived even with all this economic uncertainty](https://www.nbcnews.com/business/markets/stock-market-records-shutdown-inflation-ai-rcna236244)",
+      "* [![Travelers sit together and wait ](https://media-cldnry.s-nbcnews.com/image/upload/t_focal-80x80,f_auto,q_auto:best/rockcms/2025-10/251007-airport-shutdown-delays-se-1034a-89f053.jpg)Stephanie Scarbrough / AP](https://www.nbcnews.com/news/us-news/airport-delays-hit-second-day-government-shutdown-rcna236122)",
+      "### [Delays spread to major airports across the U.S. as shutdown drags on ](https://www.nbcnews.com/news/us-news/airport-delays-hit-second-day-government-shutdown-rcna236122)",
+      "* [![A plane takes off against the backdrop of the Chugach Mountains](https://media-cldnry.s-nbcnews.com/image/upload/t_focal-80x80,f_auto,q_auto:best/rockcms/2025-10/251008-alaska-airlines-rs-3c4c8d.jpg)Thomas Sbampato / Getty Images file](https://www.nbcnews.com/politics/politics-news/rural-communities-essential-air-service-flights-shutdown-deadline-rcna236159)",
+      "### [A key lifeline for rural communities will expire Sunday if shutdown continues](https://www.nbcnews.com/politics/politics-news/rural-communities-essential-air-service-flights-shutdown-deadline-rcna236159)",
+      "* [![Artificial intelligence](https://media-cldnry.s-nbcnews.com/image/upload/t_focal-200x100,f_auto,q_auto:best/rockcms/2025-10/251003-ai-circular-bubble-jg-4fbd21.jpg)](https://www.nbcnews.com/business/economy/openai-nvidia-amd-deals-risks-rcna234806)",
+      "## [The AI boom's reliance on circular deals is raising fears of a bubble](https://www.nbcnews.com/business/economy/openai-nvidia-amd-deals-risks-rcna234806)",
+      "* [![OpenAi logo](https://media-cldnry.s-nbcnews.com/image/upload/t_focal-200x100,f_auto,q_auto:best/rockcms/2024-05/240513-openAi-mn-1120-4728ba.jpg)](https://www.nbcnews.com/tech/tech-news/amd-signs-ai-chip-supply-deal-openai-rcna235860)",
+      "## [AMD signs AI chip-supply deal with OpenAI](https://www.nbcnews.com/tech/tech-news/amd-signs-ai-chip-supply-deal-openai-rcna235860)"
     ],
     "error": false
   }
