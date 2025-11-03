@@ -31,7 +31,7 @@ message = "Where do the tallest penguins live?"
 messages = [{"role": "user", "content": message}]
 
 response = co.chat(
-    model="command-r-plus",
+    model="command-a-reasoning-08-2025",
     messages=messages,
     documents=documents)
 

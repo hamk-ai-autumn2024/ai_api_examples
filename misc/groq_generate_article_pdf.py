@@ -24,7 +24,6 @@ examples and references in APA style. Respond directly without preamble in markd
         }
     ],
     model="llama-3.1-8b-instant",
-    #model="llama3-8b-8192",
 )
 
 end_time = time.time()
