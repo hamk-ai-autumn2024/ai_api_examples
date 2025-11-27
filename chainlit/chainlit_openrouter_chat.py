@@ -33,7 +33,7 @@ async def start():
             values=[
                 "deepseek/deepseek-chat-v3.1:free",
                 "deepseek/deepseek-r1-0528:free",
-                "x-ai/grok-4-fast:free",
+                "meituan/longcat-flash-chat:free",
                 "qwen/qwen3-coder:free",
                 "qwen/qwen3-235b-a22b:free",
                 "qwen/qwen3-30b-a3b:free",
