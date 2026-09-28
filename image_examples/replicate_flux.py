@@ -1,11 +1,13 @@
+import os
 import replicate
 import time
 from file_util import fetch_url, save_binary_file, find_new_file_name
 
 start_time = time.time()
+client = replicate.Client(api_token=os.environ["REPLICATE_API_KEY"])
 
 print("Generating image...")
-output = replicate.run(
+output = client.run(
     #"pwntus/flux-albert-einstein:2ed2f6d1a8563caa2cfada419dffc68b52881bab9bac30c0b8cbe05a4dcae0e5",
     #"bingbangboom-lab/flux-dreamscape:b761fa16918356ee07f31fad9b0d41d8919b9ff08f999e2d298a5a35b672f47e",
     #"black-forest-labs/flux-pro",
