@@ -9,7 +9,23 @@ client = openai.AsyncOpenAI(
     api_key=os.getenv("OPENROUTER_API_KEY")
 )
 
-# Default settings
+# Current free models listed by OpenRouter: https://openrouter.ai/models?q=free
+FREE_MODELS = [
+    "nvidia/nemotron-3-ultra-550b-a55b:free",
+    "inclusionai/ling-3.0-flash-fin:free",
+    "poolside/laguna-s-2.1:free",
+    "dots-studio/dots-3-note-preview:free",
+    "nvidia/nemotron-3.5-lightning:free",
+    "inclusionai/ling-3.0-flash-sante:free",
+    "nvidia/nemotron-3-super-120b-a12b:free",
+    "thinkingmachines/inkling:free",
+    "cohere/north-mini-code:free",
+    "thinkingmachines/inkling-small:free",
+    "poolside/laguna-xs-2.1:free",
+    "qwen/qwen3.8-27b:free",
+]
+
+DEFAULT_MODEL = FREE_MODELS[0]
 DEFAULT_SYSTEM_PROMPT = "You are a helpful AI assistant."
 DEFAULT_TEMPERATURE = 0.7
 
@@ -18,7 +34,7 @@ async def start():
     # Initialize settings in user session
     cl.user_session.set("system_prompt", DEFAULT_SYSTEM_PROMPT)
     cl.user_session.set("temperature", DEFAULT_TEMPERATURE)
-    cl.user_session.set("model", "moonshotai/kimi-k2:free")
+    cl.user_session.set("model", DEFAULT_MODEL)
     # Initialize chat history with system prompt
     cl.user_session.set(
         "messages",
@@ -30,18 +46,8 @@ async def start():
         cl.input_widget.Select(
             id="model",
             label="Model",
-            values=[
-                "deepseek/deepseek-chat-v3.1:free",
-                "deepseek/deepseek-r1-0528:free",
-                "meituan/longcat-flash-chat:free",
-                "qwen/qwen3-coder:free",
-                "qwen/qwen3-235b-a22b:free",
-                "qwen/qwen3-30b-a3b:free",
-                "moonshotai/kimi-k2:free",
-                "google/gemini-2.0-flash-exp:free",
-                "z-ai/glm-4.5-air:free"
-            ],
-            initial_index=6,
+            values=FREE_MODELS,
+            initial_index=0,
             description="Choose the model to use"
         ),
         cl.input_widget.TextInput(
@@ -82,7 +88,7 @@ async def setup_agent(settings):
 async def main(message: cl.Message):
     # Get current settings
     temperature = cl.user_session.get("temperature")
-    model = cl.user_session.get("model") or "moonshotai/kimi-k2:free"
+    model = cl.user_session.get("model") or DEFAULT_MODEL
     
     # Retrieve and append to chat history
     messages = cl.user_session.get("messages") or []
