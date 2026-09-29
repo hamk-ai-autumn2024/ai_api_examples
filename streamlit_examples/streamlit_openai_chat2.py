@@ -1,14 +1,14 @@
 import streamlit as st
 from openai import OpenAI
 
-with st.sidebar:
-    #openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
-    "[Get an OpenAI API key](https://platform.openai.com/account/api-keys)"
-    "[View the source code](https://github.com/streamlit/llm-examples/blob/main/Chatbot.py)"
-    "[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/streamlit/llm-examples?quickstart=1)"
+# with st.sidebar:
+#     #openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
+#     "[Get an OpenAI API key](https://platform.openai.com/account/api-keys)"
+#     "[View the source code](https://github.com/streamlit/llm-examples/blob/main/Chatbot.py)"
+#     "[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/streamlit/llm-examples?quickstart=1)"
 
-system_prompt = {"role": "system", "content": "."}
-#system_prompt = {"role": "system", "content": "You are a fitness & diet expert. You will practical advice how to get in better shape, eat and live more healthy."}
+#system_prompt = {"role": "system", "content": "You are a cartoon pirate."}
+system_prompt = {"role": "system", "content": "You are a fitness & diet expert. You will practical advice how to get in better shape, eat and live more healthy."}
 
 st.title("💬 Chatbot")
 
@@ -29,9 +29,9 @@ if prompt := st.chat_input():
     messages = [system_prompt] + st.session_state.messages  # prepend the system prompt
 
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-5.6-luna",
         messages=[system_prompt]+st.session_state.messages,
-        temperature=0.8,
+        #temperature=0.8,
         stream=True)
     #response = client.chat.completions.create(model="gpt-4o-mini", messages=st.session_state.messages)    
     #msg = response.choices[0].message.content

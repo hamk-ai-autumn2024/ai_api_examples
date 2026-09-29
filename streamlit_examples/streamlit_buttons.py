@@ -59,7 +59,7 @@ with st.form(key="my_form"):
     if age:
         st.write(f"You are {age} years old")
 
-    height = st.number_input("How tall are you cm?", min_value=0, max_value=300, value=None, placeholder="your height in cm")
+    height = st.number_input("How tall are you in cm?", min_value=0, max_value=300, value=None, placeholder="your height in cm")
     if height:
         st.write(f"You are {height} cm tall.")  
 
