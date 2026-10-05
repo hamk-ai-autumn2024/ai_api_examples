@@ -40,7 +40,11 @@ class PersonalAITutor:
             ]
         )
         # Store the question in memory
-        self.memory.add(question, user_id=user_id, metadata={"app_id": self.app_id})
+        self.memory.add(
+            [{"role": "user", "content": question}],
+            user_id=user_id,
+            metadata={"app_id": self.app_id},
+        )
 
         # Print the response from the AI in real-time
         for chunk in stream:
@@ -51,10 +55,12 @@ class PersonalAITutor:
         """
         Retrieve all memories associated with the given user ID.
 
-        :param user_id: Optional user ID to filter memories.
+        :param user_id: User ID to filter memories.
         :return: List of memories.
         """
-        return self.memory.get_all(user_id=user_id)
+        if user_id is None:
+            raise ValueError("user_id is required to retrieve memories.")
+        return self.memory.get_all(filters={"user_id": user_id})
 
 # Instantiate the PersonalAITutor
 ai_tutor = PersonalAITutor()

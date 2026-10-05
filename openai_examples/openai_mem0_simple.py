@@ -1,4 +1,3 @@
-import os
 from mem0 import Memory
 
 config = {
@@ -23,9 +22,9 @@ config = {
 # Initialize Memory with the configuration
 m = Memory.from_config(config)
 
-# Add a memory
-m.add("I'm visiting Paris.", user_id="john")
-m.add("I like to cook.", user_id="john")
+# Add memories
+m.add([{"role": "user", "content": "I'm visiting Paris."}], user_id="john")
+m.add([{"role": "user", "content": "I like to cook."}], user_id="john")
 # Retrieve memories
-memories = m.get_all(user_id="john")
+memories = m.get_all(filters={"user_id": "john"})
 print(memories)
